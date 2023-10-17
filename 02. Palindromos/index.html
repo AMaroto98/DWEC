@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        // Nivel 1 "Ana"
+
+        var input = "Ana";
+        var inputReverse = "";
+
+        for (let i = 0; i < input.length; i++) {
+            
+            inputReverse = input.charAt(i) + inputReverse;
+        }
+
+        console.log(inputReverse + " " + input);
+
+
+
+        if (isEqualsIgnoreCase(input, inputReverse)) {
+            console.log("Es palindromo de nivel 1");
+            
+        } else {
+
+            console.log("No es palindromo de nivel 1");
+        }
+
+        function isEqualsIgnoreCase(i, ir) {
+            return i.toLowerCase() === ir.toLowerCase()
+        }
+
+        console.log("----------------------------------------------");
+
+        // Nivel 2 "A na Ana" --> anAnaA
+
+        let input2 = "A na Ana";
+        console.log("Palindromo principal: " + input2);
+        let inputModified2 = ""; // Variable para eliminar los espacios
+        let inputReverse2 = "";
+
+        // Bucle para eliminar espacios
+        for (let i = 0; i < input2.length; i++) {
+            if (input2[i] !== ' ') {
+                inputModified2 += input2[i];
+            }
+        }
+
+        console.log("Sin espacios: " + inputModified2);
+
+
+        // Bucle para darle la vuelta al string
+        for (let i = inputModified2.length - 1; i >= 0; i--) {
+            inputReverse2 += inputModified2.charAt(i);
+        }
+
+        console.log( "Palindromo inverso " + inputReverse2);
+
+        if (isEqualsIgnoreCase(inputModified2, inputReverse2)) {
+
+            console.log("Es un palindromo de nivel 2");
+
+            
+        } else {
+            console.log("No es un palindromo de nivel 2");
+        }
+
+        console.log("-----------------------------------------");
+
+        // Nivel 3
+
+        input3 = "A na ána";
+        console.log("Palindromo principal: " + input3);
+        inputModified3 = ""; // Variable para eliminar espacios
+        inputReverse3 = ""; 
+
+        input3 = quitarAcentos(input3); // Eliminamos acentos
+
+        console.log("Palindromo sin acentos: " + input3);
+
+        // Bucle para eliminar espacio
+        for (let i = 0; i < input3.length; i++) {
+            if (input3[i] !== ' ') {
+                inputModified3 += input3[i];
+            }  
+            
+        }
+
+        console.log("Palindromo sin espacios: " + inputModified3);
+
+        // Bucle para girar el palindromo
+        for (let i = inputModified3.length - 1; i >= 0; i--) {
+
+            inputReverse3 += inputModified3.charAt(i);
+            
+        }
+
+        console.log("Palindromo girado: " + inputReverse3);
+
+        if (isEqualsIgnoreCase(inputModified3, inputReverse3)) {
+            console.log("Es palindromo de nivel 3");
+            
+        } else {
+
+            console.log("No es palindromo de nivel 3");
+        }
+
+
+        function quitarAcentos(cadena){
+	        const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+	        return cadena.split('').map( letra => acentos[letra] || letra).join('').toString();	
+        }
+
+    </script>
+    
+</body>
+</html>
