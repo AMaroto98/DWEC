@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        /* 
+        Crear un juego de dados. El dado debe aceptar un número variable de caras.
+        Dado simple: 2 caras
+        Dado parchis: 6 caras
+        Dado Rol = 12 caras
+
+        - Crear objeto Dado con una propiedad que sea "numCaras" y una función que será "tirarDado"
+        que sacará un número aleatorio entre 1 y "numCaras"
+        - Usuario siemore juega con el 1
+        */
+
+        function Dado(numCaras) {
+            this.numCaras = numCaras;
+            this.tirarDado = function(min, max) {
+                return Math.floor(Math.random() * (max - min) + min);
+            }            
+        }
+
+    
+
+        var simple = new Dado(2)
+        var parchis = new Dado(6);
+        var rol = new Dado(12);
+
+        let tiradaSimple = simple.tirarDado(0,2);
+        let tiradaParchis = parchis.tirarDado(0,6);
+        let tiradaRol = rol.tirarDado(0,12);
+
+        if (tiradaSimple === 1) {
+            console.log("Resultado: " + tiradaSimple);
+            console.log("Ha ganado el jugador 1");
+            
+        } else {
+            console.log("Resultado: " + tiradaSimple);  
+            console.log("No ha ganado el jugador 1");
+        }
+
+        if (tiradaParchis === 1) {
+            console.log("Resultado: " + tiradaParchis);
+            console.log("Ha ganado el jugador 1");
+            
+        } else {
+            console.log("Resultado: " + tiradaParchis);
+            console.log("No ha ganado el jugador 1");
+        }
+
+        if (tiradaRol === 1) {
+            console.log("Resultado: " + tiradaRol);
+            console.log("Ha ganado el jugador 1");
+            
+        } else {
+            console.log("Resultado: " + tiradaRol);
+            console.log("No ha ganado el jugador 1");
+        }
+
+    </script>
+    
+</body>
+</html>
