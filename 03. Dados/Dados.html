@@ -6,6 +6,17 @@
     <title>Document</title>
 </head>
 <body>
+    <h3>Dos caras</h3>
+    <div id="dosCaras"></div>
+    <div id="dosCaras2"></div>
+
+    <h3>Seis caras</h3>
+    <div id="seisCaras"></div>
+    <div id="seisCaras2"></div>
+
+    <h3>Doce caras</h3>
+    <div id="doceCaras"></div>
+    <div id="doceCaras2"></div>
 
     <script>
 
@@ -27,41 +38,44 @@
             }            
         }
 
-    
-
-        var simple = new Dado(2)
+        var simple = new Dado(2);
         var parchis = new Dado(6);
         var rol = new Dado(12);
 
-        let tiradaSimple = simple.tirarDado(0,2);
-        let tiradaParchis = parchis.tirarDado(0,6);
-        let tiradaRol = rol.tirarDado(0,12);
+        let tiradaSimple = simple.tirarDado(1,simple.numCaras + 1);
+        let tiradaParchis = parchis.tirarDado(1,parchis.numCaras + 1);
+        let tiradaRol = rol.tirarDado(1,rol.numCaras + 1);
+
 
         if (tiradaSimple === 1) {
-            console.log("Resultado: " + tiradaSimple);
-            console.log("Ha ganado el jugador 1");
+            pintarPantallaGanar("dosCaras", "dosCaras2", tiradaSimple);
             
         } else {
-            console.log("Resultado: " + tiradaSimple);  
-            console.log("No ha ganado el jugador 1");
+            pintarPantallaPerder("dosCaras", "dosCaras2", tiradaSimple);
         }
 
         if (tiradaParchis === 1) {
-            console.log("Resultado: " + tiradaParchis);
-            console.log("Ha ganado el jugador 1");
+            pintarPantallaGanar("seisCaras", "seisCaras2", tiradaParchis);
             
         } else {
-            console.log("Resultado: " + tiradaParchis);
-            console.log("No ha ganado el jugador 1");
+            pintarPantallaPerder("seisCaras", "seisCaras2", tiradaParchis);
         }
 
         if (tiradaRol === 1) {
-            console.log("Resultado: " + tiradaRol);
-            console.log("Ha ganado el jugador 1");
-            
+            pintarPantallaGanar("doceCaras", "doceCaras2", tiradaRol);
         } else {
-            console.log("Resultado: " + tiradaRol);
-            console.log("No ha ganado el jugador 1");
+            pintarPantallaPerder("doceCaras", "doceCaras2", tiradaRol)
+        }
+
+
+        function pintarPantallaGanar(id, idDos, tirada) {
+            document.getElementById(id).innerHTML = "Resultado: " + tirada;
+            document.getElementById(idDos).innerHTML = "Ha ganado el jugador 1";
+        }
+
+        function pintarPantallaPerder(id, idDos, tirada) {
+            document.getElementById(id).innerHTML = "Resultado: " + tirada;
+            document.getElementById(idDos).innerHTML = "No ha ganado el jugador 1";
         }
 
     </script>
