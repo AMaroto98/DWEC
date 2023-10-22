@@ -6,28 +6,45 @@
     <title>Document</title>
 </head>
 <body>
+
     <script>
-
-        /*
-        Cada semana un conductor debe conducir uno de los camiones, y cada semana siguiente hay que conducir un camion diferente
         
-        
-        */
+        var choferes = ["Pepe", "Juan", "Tomeu"];
+        var camiones = ["Volvo", "Scania", "Man", "Jueco"];
 
-        var chofer = ["Pepe", "Juan", "Tomeu"];
-        var camion = ["Volvo", "Scania", "Man", "Jueco"];
+        function asignarCamion(choferes, camiones) {
 
-        // Bucle para el año
-        for (let i = 0; i <= 52; i++) {
+            var semanas = 5;
 
-            for (let j = 0; j < chofer.length; j++) {
+            for (let semana = 1; semana <= semanas; semana++) {
+                var asignacionSemanal = "";
 
-                let camionDescansa = camion[j];
+                for (let i = 0; i < choferes.length; i++) {
+                    
+                    var chofer = choferes[i];
+                    console.log("Chofer:" + chofer);
 
-                chofer[j]
-                
+                    var camionIndice = (semana + i) % camiones.length;
+                    console.log("Indice camión: " + camionIndice);
+
+                    var camion = camiones[camionIndice];
+                    console.log("Camion: " + camion);
+
+                    if (i == 2) {
+
+                        asignacionSemanal = asignacionSemanal + " " + chofer + " conduce " + camion; 
+
+                    } else {
+
+                        asignacionSemanal = asignacionSemanal + " " + chofer + " conduce " + camion + " |"; 
+                    }
+                }
+                console.log("Semana: " + semana + asignacionSemanal);                
             }
         }
+
+        asignarCamion(choferes, camiones);
+
 
 
     </script>
