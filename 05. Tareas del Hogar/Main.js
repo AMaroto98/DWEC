@@ -30,7 +30,7 @@ import Persona from './Persona.js';
     familiaTorrens.push(hijoTorrens);
     familiaTorrens.push(hijaTorrens);
 
-    crearReparto(familiaTorrens, tareasFamiliaTorrens, 4);
+    // crearReparto(familiaTorrens, tareasFamiliaTorrens, 4);
 
     // Familia Moll
     var padreMoll = new Persona("Jaume", "Moll", "Moll", "Padre");
@@ -49,7 +49,7 @@ import Persona from './Persona.js';
     familiaMoll.push(hijaMayorMoll);
     familiaMoll.push(hijaMenorMoll);
 
-    // crearReparto(familiaMoll, tareasFamiliaMoll, 12);
+    crearReparto(familiaMoll, tareasFamiliaMoll, 12);
 
 
     function crearReparto(familia, tareas, duracion) {
@@ -104,7 +104,7 @@ import Persona from './Persona.js';
                     var apellido = persona.getApellido();
                     var indiceTarea = (semana + i) % familia.length;
                     var tarea = tareas[indiceTarea];
-                    
+
                     asignacionSemanal += " " + nombre + " " + apellido + " Tarea: " + tarea + "\n";
                     contenido += "<tr><td>" + semana + "</td><td>" + nombre + " " + apellido + "</td>" + "<td>" + tarea + "</td></tr>";  
                 }
@@ -116,3 +116,22 @@ import Persona from './Persona.js';
 
         }
     }
+
+    // function crearReparto(familia, tareas, duracion) {
+
+    //     console.log("Planificación de la familia: " + familia[0].getFamilia());
+
+    //     for (let semana = 1; semana <= duracion; semana++) {
+
+    //         var asignacionSemanal = "";
+
+    //         for (let i = 0; i < tareas.length; i++) {
+    //             var tarea = tareas[i];
+    //             var indiceMiembro = (semana + i) % familia.length;
+    //             var miembro = familia[indiceMiembro];
+    //             asignacionSemanal += miembro.getNombre() + " " + miembro.getApellido() + " Tarea: " + tarea + "\n";
+    //         }
+
+    //         console.log(asignacionSemanal);               
+    //     }
+    // }
