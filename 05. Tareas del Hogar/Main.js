@@ -1,5 +1,7 @@
 import Persona from './Persona.js';
 
+// Instancio objetos que representan miembros de las familias y las añado a arrays. 
+
 // Familia Sastre
 var padreSastre = new Persona("Pedro", "Sastre", "Sastre", "Padre");
 var madreSastre = new Persona("Ana", "Sastre", "Sastre", "Madre");
@@ -14,6 +16,7 @@ familiaSastre.push(madreSastre);
 familiaSastre.push(hijoSastre);
 familiaSastre.push(hijaSastre);
 
+// Llamo al método para crear la tablilla de tareas
 crearReparto(familiaSastre, tareasFamiliaSastre, 52);
 
 // Familia Torrens
@@ -51,7 +54,7 @@ familiaMoll.push(hijaMenorMoll);
 
 crearReparto(familiaMoll, tareasFamiliaMoll, 12);
 
-
+// Para mi lo que tenia más sentido era asignar tareas a familiares y no familiares a tareas, por eso recorro la array de familias.
 function crearReparto(familia, tareas, duracion) {
 
     document.getElementById("titulo").innerHTML = "Reparto de tareas de la familia: " + familia[0].getFamilia() + "\n";
@@ -80,5 +83,4 @@ function crearReparto(familia, tareas, duracion) {
     }
     tabla = tabla + contenido + "</table>"
     document.getElementById("tabla").innerHTML = tabla;
-
 }

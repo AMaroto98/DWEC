@@ -40,4 +40,5 @@ class Persona {
     }
 }
 
+// Exporto la clase para poder usarlo en otro archivo JS.
 export default Persona;
