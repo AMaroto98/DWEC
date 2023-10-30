@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        // Eventos
+
+        // ¿Qué es?
+        // Una función que se ejecuta después de que el usuario realice una acción en concreto
+        // (click, doble click, scroll)
+        
+        // ¿Cómo?
+
+        // 1. HTML --> <P onClick="hola()">
+        // 2. Listener 
+
+    </script>
+
+    <p>Hola, qué tal si me clickas me vuelvo rojo</p>
+    <p>Hola, qué tal si me clickas me vuelvo rojo</p>
+    <p>Hola, qué tal si me clickas me vuelvo rojo</p>
+    <p>Hola, qué tal si me clickas me vuelvo rojo</p>
+
+    <script>
+
+        document.querySelector("p").addEventListener("click", function() {
+
+            document.querySelector("p").style.color = "red";
+            
+        })
+
+        var parrafos = document.querySelectorAll("p");
+
+        // Parametro de evento siempre viene en la función aunque yo no se lo diga
+        for (let i = 0; i < parrafos.length; i++) {
+            parrafos[i].addEventListener("click", function(){
+                console.log(i);
+                // console.log(ev);
+
+                for (var j = 0; j < arguments.length; j++) {
+                    console.log(arguments[j]);
+                    
+                    
+                }
+            })
+            
+        }
+    
+    </script>
+    
+</body>
+</html>

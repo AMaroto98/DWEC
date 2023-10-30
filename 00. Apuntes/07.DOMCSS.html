@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p class="saludo" id="primero">Hola</p>
+    <p class="saludo">Que</p>
+    <p>Tal</p>
+
+
+    <!-- Ejemplos propiedades CSS en DOM -->
+    <script>
+
+        // 1. Cambiar "Hola" por "Adiós" y ponerla azul
+        document.querySelector("#primero").innerHTML = "Adiós";
+        document.querySelector("#primero").style.color = "blue";
+        // O se puede hacer así:
+        document.querySelector("#primero");
+        // primero.innerHTML = "Adiós";
+        // primero.style.color = "blue";
+
+        // 2. Pintar la clase .saludo de rojo que sobrescribirá la azul y ponrerle un background-color amarillo
+
+        // Devuelve una array de todos los elementos de la clase saludo
+        var saludo = document.querySelectorAll(".saludo");
+        
+        for (let i = 0; i < saludo.length; i++) {
+            saludo[i].style.color = "red";  
+
+            // CSS --> background-color
+            // JS --> backgroundColor
+            // Y así con todas las propiedades
+
+            saludo[i].style.backgroundColor = "yellow";      
+        }
+
+        // 3. Añadir a la palabra "tal" un "?" al final pero concatenando el ? al final sin volver a escribir tal.
+        var tercero = document.querySelector("p:nth-child(3)");
+        tercero.append("?");
+
+
+        // 4. Añadir una foto delante de la palabra "Adiós" y ponerle un tamaño de 100px de ancho 
+        var img = document.createElement("img");
+        img.src = "https://i.pinimg.com/originals/ed/18/d3/ed18d375eaf88dee2862e8bdfebb5790.png";
+        img.width = "100";
+        primero.insertAdjacentElement("afterbegin", img);
+
+        // Otra manera
+        // primero.innerHTML += "<img src='https://i.pinimg.com/originals/ed/18/d3/ed18d375eaf88dee2862e8bdfebb5790.png' style='width: 100px'>"
+
+    </script>
+    
+</body>
+</html>

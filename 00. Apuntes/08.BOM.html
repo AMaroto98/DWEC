@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bom</title>
+</head>
+<body>
+
+    <button onclick="historial()">Historial</button>
+
+    <!-- Abrir nueva ventana con la web del Borja con el tamaño de 250px y 300px     -->
+    <button onclick="abrirVentana()">Abrir ventana</button>
+
+    <button onclick="cerrarVentana()">Cerrar ventana</button>
+
+    <button onclick="recargarVentana()">Recargar ventana</button>
+
+    <button onclick="saludar()">Saludar</button>
+
+
+
+    <!-- Broweser Object Model -->
+
+    <script>
+
+        // Se accede a través de window.
+        // Por ejemplo alert. es de window pero no se pone window delante de las cosas
+
+        // alert("hola");
+        // window.alert("adios")
+
+        // Va dos veces hacia atrás en la pestaña en la que estamos
+        function historial() {
+
+            window.history.go(-2);
+    
+            // Así también funciona
+            // history.go(-2);
+        }
+
+        var miVentana;
+
+        function abrirVentana() {
+            miVentana = window.open("https://www.cifpfbmoll.eu/", "Borja Moll", "width=250,height=300");
+        }
+
+        function cerrarVentana() {
+            // Undefined == false así que no entra al if, si no existe la ventana no saltará el error
+            if (miVentana) {
+                miVentana.close();
+            }
+        }
+
+        function recargarVentana() {
+            location.reload();
+        }
+
+        // Pedirle a un usuario el nombre y saludalo
+
+        function saludar() {
+            let nombre = prompt("Introduce tu nombre mostro: ");
+
+            document.querySelector("body").innerHTML += "<br>" + nombre;
+
+        }
+    </script>
+
+    
+</body>
+</html>

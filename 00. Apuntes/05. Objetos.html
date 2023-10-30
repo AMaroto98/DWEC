@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+
+        var antonio = {
+            name: "Antonio",
+            surname: "Maroto",
+            fullName: function() {
+                return this.name + " " + this.surname;
+            }
+        }
+
+        // Objeto con contsructor
+
+        function Person(name, surname) {
+            this.name = name;
+            this.surname = surname;
+            this.fullName = function() {
+                return this.name + " " + this.surname;
+            }
+        }
+
+        var jaume = new Person("Jaume", "Bordoy");
+        var pep = new Person("Pep", "Guardiola");
+
+        console.log(jaume.fullName());
+        console.log(pep);
+
+        // Objetos en JS son de tipo Prototype
+        // Tienen un prototipo definido al cual se le pueden añadir cosas como por ejemplo un atributo no definido, como el del coche.
+
+        pep.hasCar = true;
+
+        console.log(pep);
+
+
+    </script>
+    
+</body>
+</html>

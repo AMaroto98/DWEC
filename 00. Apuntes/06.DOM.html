@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+
+    <style>
+        table, td, th {
+        border: 1px solid black;
+
+        }
+        th, td {
+            justify-content: center;
+            align-items: center;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- DOCUMENT OBJECT MODEL -->
+
+    <script>
+        // document.getElementById();
+        // document.getElementsByClassName();
+        // document.querySelector();
+        // var x = document.createElement("img");
+        // x.src = "Almeja";
+
+        // querySelector("body").appendChild(x);
+
+
+        function Marca(nombre, modelo) {
+            this.nombre = nombre;
+        }
+
+        function Modelo(marca, nombre) {
+            this.marca = marca;
+            this.nombre = nombre;
+        }
+
+        var ford = new Marca("Ford");
+        var toyota = new Marca("Toyota");
+        var mercedes = new Marca("Mercedes");
+
+        var mustang = new Modelo(ford, "Mustang");
+        var corolla = new Modelo(toyota, "Corolla");
+        var yaris = new Modelo(toyota, "Yaris");
+        var a45 = new Modelo(mercedes, "A45");
+
+        var modelos = [];
+
+        modelos.push(mustang);
+        modelos.push(corolla);
+        modelos.push(yaris);
+        modelos.push(a45);
+
+        // Ejemplo
+
+        // document.querySelector("body").innerHTML = "<p>" + mustang.marca.nombre + " " + mustang.nombre + "</p>";
+
+
+    </script>
+
+    <!-- <table></table>
+
+    <script>
+        for (let i = 0; i < modelos.length; i++) {
+            document.querySelector("table").innerHTML +="<tr>" +  "<th>" + modelos[i].marca.nombre + "</th>" + "<td>" + modelos[i].nombre + "</td>" + "</tr>";         
+        }
+    </script> -->
+
+     <!-- Tabla hecha por Alex -->
+    <script>
+
+        // Tabla
+        var tabla = document.createElement("table");
+
+        // Cabecera
+        var trCabecera = document.createElement("tr")
+        tabla.appendChild(trCabecera);
+
+        var thMarca = document.createElement("th");
+        thMarca.innerHTML = "Marca";
+
+        var thModelo = document.createElement("th");
+        thModelo.innerHTML = "Modelo";
+
+        trCabecera.appendChild(thMarca);
+        trCabecera.appendChild(thModelo);
+
+        for (let i = 0; i < modelos.length; i++) {
+            var trInfo = document.createElement("tr");
+
+            var tdMarca = document.createElement("td");
+            tdMarca.innerHTML = modelos[i].marca.nombre;
+
+            var tdModelo = document.createElement("td");
+            tdModelo.innerHTML = modelos[i].nombre;
+
+            trInfo.appendChild(tdMarca);
+            trInfo.appendChild(tdModelo);
+            tabla.appendChild(trInfo);
+
+            // Para eliminar pares
+            if (i % 2 === 0) {
+                tabla.removeChild(trInfo);
+            }
+        }
+
+
+        var body = document.querySelector("body");
+        body.appendChild(tabla);
+
+    </script>
+
+
+
+    
+
+</body>
+</html>

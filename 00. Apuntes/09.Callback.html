@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callbacks</title>
+</head>
+<body>
+    
+    <script>
+
+        // Funciones de Callback
+
+        // Es una función que por parámetro se pasa especificación.
+
+        function hello() {
+            return "Hello";
+        }
+
+        function bye() {
+            return "Bye";
+        }
+
+        // Esta función tiene dos parámetros, un string nombre y un tipo función de callback
+        // Pasas la función y dentro la invocas
+        function saluda(nombre, tipo) {
+            return tipo() + " " + nombre;
+            
+        }
+        // Polimorfismo implementando funciones de callback
+        console.log(saluda("Alex", hello));
+        console.log(saluda("Alex", bye));
+        console.log(saluda("Antonio", function() {
+            return "Hasta luego";
+        }));
+
+
+        setTimeout(function() {
+            console.log("3 Segundos más tarde");
+        }, 3000);
+
+
+    </script>
+    
+</body>
+</html>

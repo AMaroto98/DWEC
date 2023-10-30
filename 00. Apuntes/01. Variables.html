@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables</title>
+</head>
+<body>
+<h1>Variables de la muerte</h1>
+
+<script>
+
+    // Variables
+
+    /* 
+    Tipos:
+    - null
+    - undefined
+    - boolean
+    - number (int, float)
+    - string
+    - object (arrays...)
+    */ 
+
+    var a = null;
+    var b;
+    var c = false;
+    var d = 1;
+    var e = 4.5;
+    var f = "Hola";
+    var g = {
+        name: 'Antonio',
+        surname: 'Maroto',
+        hasBike: true
+    }; // Objetos siempre van entre llaves. Los objetos van entre llaves
+
+    var i = [3, "Hola", 5.5, true];
+
+    // Los tipos son dinámicos, pueden cambiar
+
+    console.log("Var d es: ", typeof d);
+    console.log("Var f es: ", typeof f);
+    d = d + f;
+    console.log("Var d es: ", typeof d);
+
+    // Funciones
+
+    function hello() {
+        return "Hello Wolrd!";
+    }
+    console.log(hello());
+
+    var j = function() {
+        return "Hello J";
+    }
+
+    console.log(j());
+
+    var k = {
+        name: 'Antonio',
+        surname: 'Maroto',
+        fullName: function() {
+            return this.name + " " + this.surname;
+        }
+    };
+
+    console.log(k.fullName());
+
+    
+
+
+</script>
+
+    
+</body>
+</html>
