@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="js/Main.js"></script>
     <title>Póker</title>
+
+    <style>
+        #cards {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
     
 </head>
 <body> 
@@ -12,11 +19,15 @@
     <button id="Play">Play!</button>
 
     <!-- Divs para mostrar imágenes -->
-    <div id="showCard0"></div>
-    <div id="showCard1"></div>
-    <div id="showCard2"></div>
-    <div id="showCard3"></div>
-    <div id="showCard4"></div>
+    <div id="cards">
+        <div id="showCard0"></div>
+        <div id="showCard1"></div>
+        <div id="showCard2"></div>
+        <div id="showCard3"></div>
+        <div id="showCard4"></div>
+    </div>
+
+    <div id="outcome"></div>
     
 </body>
 </html>
