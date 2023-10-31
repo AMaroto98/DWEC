@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECMA Script</title>
+</head>
+<body>
+
+    <script>
+
+        // ES5 --> 2009
+        // ES6 --> 2015 (variables, modulos, APIS, scopes, promises)
+        // ES14 --> 2023 
+
+
+        /*
+        Variables:
+
+        ES5 - var
+
+        ES6 - let, const
+
+        let: declarar variables que se pueden sobreescribir
+        const: declarar constante o variables que no se pueden sobreescribir
+        */
+
+        let x = 4;
+        x = 5;
+
+        const y = 5;
+        // y = 6; ERROR
+
+        const z = [];
+        z.push("hola");
+        z.push("adiós");
+        // z = ["Hola"] --> ERROR: NO SE PUEDE SOBREESCRIBIR
+
+        const pep = {
+            name: "Pep",
+            surname: "Toni"
+        }
+        // Aquí se cambia el valor no el objeto por eso no peta
+        pep.name = "Joan";
+
+        // Esto si que peta
+        // pep = {name: "Alberto"};
+
+        /*
+        Usar const en los siguientes casos:
+
+        - Más rápido que let
+        - Te aseguras que el tipo no cambia (tipo estático)
+        - Evita problemas de inicialización
+        
+        */
+
+        // const a; --> Esto peta
+
+
+
+        /*
+        Diferencia var y let/const:
+
+        Diferencia principal es el SCOPE (ámbito de la variable)
+        Var --> ámbito de función. Si no declaras la variable ocurre HOISTING (se verá más adelante).
+        let/const --> Ámbito de bloque. Si no se declara tambien salta HOISTING
+
+
+        
+        
+        */
+
+        function vanilla() {
+            for (var i = 0; i < 5; i++) {
+                var j = i + 3;
+                console.log("i " + i + " j " + j);
+            }
+            console.log("i final " + i + " j final " + j);
+        }
+
+        vanilla();
+
+        function es6() {
+            for (let i = 0; i < 5; i++) {
+                let j = i + 3;
+                // Tambien se puede esto:
+                // const j = i + 3;
+                console.log("i " + i + " j " + j);
+            }
+            // console.log("i final " + i + " j final " + j);
+
+        }
+
+        es6()
+
+        // Redeclarar variables
+
+        function redeclare() {
+            var x = 3;
+            var x = 4;
+            console.log(x);
+
+            let y = 3;
+            // let y = 4; --> no se puede
+            console.log(y); 
+        }
+
+        redeclare();
+
+
+        // HOISTING
+        // Aparece cuando no se declara un var;
+        function hosting() {
+            var h1 = "no hoisted";
+            h2 = "hoisted"; 
+            // El h2 se declara laa variable arriba del todo y se hace global sin yo decirselo, es automático
+            console.log("hoist: " + h1, h2);
+        }
+
+        function hosting2() {
+            // console.log("hoist: " + h1);
+            console.log("hoist2: " + h2);
+        }
+
+        
+
+        hosting();
+        hosting2(); 
+
+
+    </script>
+    
+</body>
+</html>

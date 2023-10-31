@@ -1,116 +1,37 @@
 import Card from "./Card.js";
 
+var suits = ["diamonds", "hearts", "clubs", "spades"];
+var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 var packOfCards = [];
 
-// Instancio cartas de Diamantes
-var twoOfDiamonds = new Card(2, "Diamonds", "images/2_of_diamonds.png");
-var threeOfDiamonds = new Card(3, "Diamonds", "images/3_of_diamonds.png");
-var fourOfDiamonds = new Card(4, "Diamonds", "images/4_of_diamonds.png");
-var fiveOfDiamonds = new Card(5, "Diamonds", "images/5_of_diamonds.png");
-var sixOfDiamonds = new Card(6, "Diamonds", "images/6_of_diamonds.png");
-var sevenOfDiamonds = new Card(7, "Diamonds", "images/7_of_diamonds.png");
-var eightOfDiamonds = new Card(8, "Diamonds", "images/8_of_diamonds.png");
-var nineOfDiamonds = new Card(9, "Diamonds", "images/9_of_diamonds.png");
-var tenOfDiamonds = new Card(10, "Diamonds", "images/10_of_diamonds.png");
-var jackOfDiamonds = new Card(11, "Diamonds", "images/jack_of_diamonds2.png");
-var queenOfDiamonds = new Card(12, "Diamonds", "images/queen_of_diamonds2.png");
-var kingOfDiamonds = new Card(13, "Diamonds", "images/king_of_diamonds2.png");
-var aceOfDiamonds = new Card(1, "Diamonds", "images/ace_of_diamonds.png");
+suits.forEach(suit => {
+    numbers.forEach(number => {
 
-// COpia
-// var twoOfDiamonds = new Card(2, "Diamonds", "images/2_of_diamonds.png");
-// var threeOfDiamonds = new Card(3, "Diamonds", "images/3_of_diamonds.png");
-// var fourOfDiamonds = new Card(4, "Diamonds", "images/4_of_diamonds.png");
-// var fiveOfDiamonds = new Card(5, "Diamonds", "images/5_of_diamonds.png");
-// var sixOfDiamonds = new Card(6, "Diamonds", "images/6_of_diamonds.png");
-// var sevenOfDiamonds = new Card(7, "Diamonds", "images/7_of_diamonds.png");
-// var eightOfDiamonds = new Card(8, "Diamonds", "images/8_of_diamonds.png");
-// var nineOfDiamonds = new Card(9, "Diamonds", "images/9_of_diamonds.png");
-// var tenOfDiamonds = new Card(10, "Diamonds", "images/10_of_diamonds.png");
-// var jackOfDiamonds = new Card(11, "Diamonds", "images/jack_of_diamonds2.png");
-// var queenOfDiamonds = new Card(12, "Diamonds", "images/queen_of_diamonds2.png");
-// var kingOfDiamonds = new Card(13, "Diamonds", "images/king_of_diamonds2.png");
-// var aceOfDiamonds = new Card(1, "Diamonds", "images/ace_of_diamonds.png");
+        let pathImage; 
 
-// Jack ---> 11
-// Queen --> 12
-// King --> 13
-// Ace --> 1 / 14
+        if (number === 1) {
 
-// Instancio cartas de Corazones
-var twoOfHearts = new Card(2, "Hearts", "images/2_of_hearts.png");
-var threeOfHearts = new Card(3, "Hearts", "images/3_of_hearts.png");
-var fourOfHearts = new Card(4, "Hearts", "images/4_of_hearts.png");
-var fiveOfHearts = new Card(5, "Hearts", "images/5_of_hearts.png");
-var sixOfHearts = new Card(6, "Hearts", "images/6_of_hearts.png");
-var sevenOfHearts = new Card(7, "Hearts", "images/7_of_hearts.png");
-var eightOfHearts = new Card(8, "Hearts", "images/8_of_hearts.png");
-var nineOfHearts = new Card(9, "Hearts", "images/9_of_hearts.png");
-var tenOfHearts = new Card(10, "Hearts", "images/10_of_hearts.png");
-var jackOfHearts = new Card(11, "Hearts", "images/jack_of_hearts2.png");
-var queenOfHearts = new Card(12, "Hearts", "images/queen_of_hearts2.png");
-var kingOfHearts = new Card(13, "Hearts", "images/king_of_hearts2.png");
-var aceOfHearts = new Card(1, "Hearts", "images/ace_of_hearts.png");
+            pathImage = `images/ace_of_${suit}.png`
 
-// Instancio cartas de espadas
-var twoOfSpades = new Card(2, "Spades", "images/2_of_spades.png");
-var threeOfSpades = new Card(3, "Spades", "images/3_of_spades.png");
-var fourOfSpades = new Card(4, "Spades", "images/4_of_spades.png");
-var fiveOfSpades = new Card(5, "Spades", "images/5_of_spades.png");
-var sixOfSpades = new Card(6, "Spades", "images/6_of_spades.png");
-var sevenOfSpades = new Card(7, "Spades", "images/7_of_spades.png");
-var eightOfSpades = new Card(8, "Spades", "images/8_of_spades.png");
-var nineOfSpades = new Card(9, "Spades", "images/9_of_spades.png");
-var tenOfSpades = new Card(10, "Spades", "images/10_of_spades.png");
-var jackOfSpades = new Card(11, "Spades", "images/jack_of_spades2.png");
-var queenOfSpades = new Card(12, "Spades", "images/queen_of_spades2.png");
-var kingOfSpades = new Card(13, "Spades", "images/king_of_spades2.png");
-var aceOfSpades = new Card(1, "Spades", "images/ace_of_spades.png");
+        } else if(number === 11) {
 
+            pathImage = `images/jack_of_${suit}2.png`
 
-packOfCards.push(
-    twoOfDiamonds,
-    threeOfDiamonds,
-    fourOfDiamonds,
-    fiveOfDiamonds,
-    sixOfDiamonds,
-    sevenOfDiamonds,
-    eightOfDiamonds,
-    nineOfDiamonds,
-    tenOfDiamonds,
-    jackOfDiamonds,
-    queenOfDiamonds,
-    kingOfDiamonds,
-    aceOfDiamonds,
-    twoOfHearts,
-    threeOfHearts,
-    fourOfHearts,
-    fiveOfHearts,
-    sixOfHearts,
-    sevenOfHearts,
-    eightOfHearts,
-    nineOfHearts,
-    tenOfHearts,
-    jackOfHearts,
-    queenOfHearts,
-    kingOfHearts,
-    aceOfHearts,
-    twoOfSpades,
-    threeOfSpades,
-    fourOfSpades,
-    fiveOfSpades,
-    sixOfSpades,
-    sevenOfSpades,
-    eightOfSpades,
-    nineOfSpades,
-    tenOfSpades,
-    jackOfSpades,
-    queenOfSpades,
-    kingOfSpades,
-    aceOfSpades
-);
+        } else if(number === 12) {
+            
+            pathImage = `images/queen_of_${suit}2.png`
 
+        }else if(number === 13) {
+            
+            pathImage = `images/king_of_${suit}2.png`
 
+        } else {
+            pathImage = `images/${number}_of_${suit}.png`
+
+        }
+        packOfCards.push(new Card(number, suit, pathImage));
+    }); 
+});
 
 console.log(packOfCards);
 
