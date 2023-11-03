@@ -39,7 +39,10 @@ console.log(packOfCards);
 const playButton = document.getElementById("Play");
 playButton.addEventListener("click", function() {
     openWindow();
-    // Apunte personal: Es una función que ejecuta otra función, si pongo play() como segundo parámetro salta automáticamente y no cuando yo clicko en el botón.
+
+    // Lo dejo para pruebas
+    // play(packOfCards);
+    // Apunte personal: Es una función que ejecuta otra función, si pongo play() (por ejemplo) como segundo parámetro salta automáticamente y no cuando yo clicko en el botón.
 });
 
 const closeWindowButton = document.getElementById("closeWindow");
@@ -62,7 +65,6 @@ function play(packOfCards) {
     showCards(hand);
     checkCouples(hand);
 }
-
 
 // Método para repartir las cartas
 function dealCards(hand, packOfCards) {
