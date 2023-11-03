@@ -31,10 +31,56 @@
 
     4+5+pi+3*4*7
     4*pi*8(12+4+7)
-    
-    
-    
     */
+
+    const mates = {
+        pi: Math.PI,
+        suma: function() {
+            console.log(arguments);
+            if (arguments) {
+                let resultado = 0;
+                for (let i = 0; i < arguments.length; i++) {
+                    resultado += arguments[i];
+                }
+
+                return resultado;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    // No se redeclara el objeto, se le añade propiedad nueva
+    mates.multiplica = function() {
+        console.log(arguments);
+        if (arguments) {
+            let resultado = 1;
+            for (let i = 0; i < arguments.length; i++) {
+                resultado *= arguments[i];
+            }
+
+            return resultado;
+        } else {
+            return 1;
+        }
+    }
+
+    const op = mates.suma(3,4,5)
+    console.log(op);
+
+    const op2 = mates.multiplica(3,5);
+    console.log(op2);
+
+
+    // 4+5+pi+3*4*7
+    // 4*pi*8(12+4+7)
+
+    const op3 = mates.suma(4,5, mates.pi) + mates.multiplica(3,4,7)
+    console.log(op3);
+    const op4 = mates.multiplica(4,mates.pi, 8, mates.suma(12,4,7));
+    console.log(op4);
+
+
     </script>
     
 </body>

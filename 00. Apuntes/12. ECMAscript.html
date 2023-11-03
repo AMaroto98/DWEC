@@ -126,7 +126,89 @@
         
 
         hosting();
-        hosting2(); 
+        hosting2();
+
+        /*
+        Funciones avanzadas!
+        
+        */ 
+
+        function name(params) {
+            // arguments --> Número de parametros
+            // Son valores
+            // Clousures --> ES6
+        }
+
+        /*CLOUSURES*/ 
+        function clousure(a,b) {
+            function esnclousure1(x,y) {
+                return x + y;
+            }
+
+            function esnclousure2(x,y) {
+                return x * y;
+            }
+
+
+            return esnclousure1(a,b) - esnclousure2(a,b);
+        }
+
+        console.log(clousure(3,4));
+        // console.log(esnclousure1(3,4)); ESTO PETA NO SE PUEDE ACCEDER 
+
+        // Arrow functions
+
+        // Old way
+        setTimeout(function() {
+            clousure(6,7)
+            
+        }, 1000);
+
+        // New way
+        setTimeout(() => {
+            clousure(6,7)
+            
+        }, 1000);
+
+        // Hace lo mismo old y new, solo te ahorras escribir la palabra function
+
+        // Particularidades
+
+        /*
+        1- Si no tiene {} se considera que hace un return
+        2- Arrow function los arguments no funcionan
+        */ 
+
+        function suma(a,b) {
+            return a + b;
+            
+        }
+
+        function multiplca(a,b) {
+            return a * b;
+        }
+
+        function operacion(a,b,cb) {
+            return cb(a,b);
+        }
+
+        console.log(operacion(3,4,suma));
+        console.log(operacion(3,4,multiplca));
+        console.log(operacion(3,4,function(a,b) {
+            return a - b;
+        }));
+
+
+        console.log(operacion(3, 4,(a,b)=> {
+            return a - b;
+        }));
+
+        // Sin llaves
+        console.log(operacion(3, 4,(a,b)=> a - b));
+
+        console.log(operacion(3, 4, a => a - a));
+
+
 
 
     </script>

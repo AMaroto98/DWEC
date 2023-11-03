@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="mates.js"></script>
+    <script src="matesBinarias.js"></script> -->
+
+</head>
+<body>
+
+    <h1>Esto es una página de matemáticas</h1>
+    <button onclick="printMe()">Click!</button>
+    <button id="botonBueno"">Click!</button>
+
+
+    <script type="module">
+        import {suma, multiplica, dospi} from "./mates.js"
+        import {sumaBin, multiplica as multiBin} from "./matesBinarias.js"
+        
+
+        // SUma dos número
+        console.log(suma(4,7));
+
+        // MUltiplica dos número
+        console.log(multiplica(6,5));
+
+        console.log(multiBin(6,5));
+
+
+        console.log(sumaBin(4,7));
+
+        console.log(dospi);
+        
+        /*
+        Qué es un modulo de JS?
+
+        Es un fichero que exporta explicitamente items de JS (Variables, funciones, clases...)
+
+        Cómo se carga? con import
+
+        - Podemos definir explicitamente  que partes queremos cargar haciendo uso de DESTRUCTING
+        {A,B,C...}
+        - Si no se define que propiedad cargar se carga DEFAULT
+        - Se admiten alias. En caso de ambiguedades
+        
+        - Para que un import funcione es necesario declarar el script como modul
+        
+        OJOOO!!! -> El DOM no tiene visibilidad en los módulos.
+
+        */ 
+
+        function printMe() {
+            console.log("Hello world");
+        }
+
+        // Solución chapuza
+        // EL BOM tiene visibilidad en los módulos
+        window.printMe = printMe;
+        // window.alert = printMe;
+
+        /* Correcta */
+        document.querySelector("#botonBueno").addEventListener('click', printMe)
+
+
+    </script>
+    
+</body>
+</html>
