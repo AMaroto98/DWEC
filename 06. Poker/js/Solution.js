@@ -1,63 +1,53 @@
 import Card from "./Card.js";
 
+// Variables para poder crear el mazo de cartas.
 var suits = ["diamonds", "hearts", "clubs", "spades"];
 var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+// Mazo de cartas vacio al cual se añadiran las cartas.
 var packOfCards = [];
 
+// Bucle para crear las 52 cartas del mazo.
 suits.forEach(suit => {
     numbers.forEach(number => {
 
-        let pathImage; 
+        let pathImage;
 
         if (number === 1) {
 
-            pathImage = `images/ace_of_${suit}.png`
+            pathImage = `../images/ace_of_${suit}.png`
 
-        } else if(number === 11) {
+        } else if (number === 11) {
 
-            pathImage = `images/jack_of_${suit}2.png`
+            pathImage = `../images/jack_of_${suit}2.png`
 
-        } else if(number === 12) {
-            
-            pathImage = `images/queen_of_${suit}2.png`
+        } else if (number === 12) {
 
-        }else if(number === 13) {
-            
-            pathImage = `images/king_of_${suit}2.png`
+            pathImage = `../images/queen_of_${suit}2.png`
+
+        } else if (number === 13) {
+
+            pathImage = `../images/king_of_${suit}2.png`
 
         } else {
-            pathImage = `images/${number}_of_${suit}.png`
+            pathImage = `../images/${number}_of_${suit}.png`
 
         }
         packOfCards.push(new Card(number, suit, pathImage));
-    }); 
+    });
 });
 
 console.log(packOfCards);
 
-// Evento que se ejecuta cuando clickas en Play!
-const playButton = document.getElementById("Play");
-playButton.addEventListener("click", function() {
-    openWindow();
+// Sirve para que cuando se abra la pestaña se ejecute la función play() y empiece el juego.
+window.onload = function () {
+    play(packOfCards);
+}
 
-    // Lo dejo para pruebas
-    // play(packOfCards);
-    // Apunte personal: Es una función que ejecuta otra función, si pongo play() (por ejemplo) como segundo parámetro salta automáticamente y no cuando yo clicko en el botón.
-});
-
-const closeWindowButton = document.getElementById("closeWindow");
-closeWindowButton.addEventListener('click', function() {
-    closeWindow();
-});
-
-const closeAllButton = document.getElementById("closeAll");
-closeAllButton.addEventListener('click',function(){
-    closeAllWindow();
-});
-
+// Función principal que ejecuta el resto de funciones para jugar al póker.
 function play(packOfCards) {
 
-    // Array de las cartas que apareceran en pantalla
+    // Variable de las 5 cartas que tendrá el usuario y verá por pantalla.
     var hand = [];
 
     // Llamo a todos los métodos para jugar al póker
@@ -73,11 +63,11 @@ function dealCards(hand, packOfCards) {
 
     for (let i = 1; i <= 5; i++) {
 
-        // Si no hay más indices que repartir se avisa al usuario
+        // Condición para que cuando el pool de cartas sea menos a 4 no se repartan más y se avise al usuario.
         if (packOfCards.length <= 4) {
             let outcome = document.createElement("p");
             let divToInsert = document.getElementById("outcome");
-            outcome.innerHTML = "¡Ya no hay más cartas disponibles!";
+            outcome.innerHTML = "¡Ya no hay más cartas disponibles, refresca la página para seguir jugando!";
             divToInsert.innerHTML = "";
             divToInsert.appendChild(outcome);
             break;
@@ -100,7 +90,6 @@ function dealCards(hand, packOfCards) {
         packOfCards.splice(randomIndex, 1);
     }
     console.log("Longuitud mazo al acabar: " + packOfCards.length);
-    console.log(hand);
 }
 
 // Método para mostrar las cartas por pantalla
@@ -112,9 +101,9 @@ function showCards(hand) {
         let cardToShow = document.createElement("img");
         cardToShow.src = hand[i].pathImage;
         cardToShow.alt = hand[i].number + " " + hand[i].cardSuit;
-        cardToShow.width = "50";
-        cardToShow.height = "80";
-        // console.log(cardToShow);
+        cardToShow.width = "70";
+        cardToShow.height = "100";
+
         // Selecciono divs del HTML para poder insertar las imagenes
         let divToInsert = document.getElementById("showCard" + i);
         // Limpio las cartas previas para que no se acumulen 
@@ -150,31 +139,20 @@ function checkCouples(hand) {
     } else if (couples.length === 2) {
         outcome.innerHTML = "¡Has conseguido una pareja doble!"
     }
-    
+
     // Dejo el DIV vacio por si vuelve a salir otra pareja no se stacke el resultado
     divToInsert.innerHTML = "";
     divToInsert.appendChild(outcome);
 }
 
-var newWindow;
+// Listener para refrescar la página y volver a jugar.
+const refreshButton = document.getElementById("Refresh");
+refreshButton.addEventListener("click", function () {
+    location.reload();
+});
 
-function openWindow() {
-    newWindow = window.open("pages/solution.html", "Póker", "width=800,height=300");
-    newWindow.onload = function() {
-        play(packOfCards);
-    }
-}
-
-function closeWindow() {
-    // Undefined == false así que no entra al if, si no existe la ventana no saltará el error
-    if (newWindow) {
-        newWindow.close();
-    }
-}
-
-function closeAllWindow() {
-    if (newWindow && window) {
-        newWindow.close();
-        window.close();
-    }
-}
+// Listener para crear una nueva mano de cartas.
+const newHandhButton = document.getElementById("newHand");
+newHandhButton.addEventListener("click", function () {
+    play(packOfCards);
+});
