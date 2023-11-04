@@ -4,32 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Solution.css">
+
     <script type="module" src="../js/Solution.js"></script>
     <title>Póker</title>
-    <style>
-        #cards {
-            display: flex;
-            flex-direction: row;
-        }
-    </style>
 </head>
 
 <body>
 
-    <button id="Refresh">Refrescar</button>
-    <button id="newHand">Nueva mano</button>
+    <div class="container">
+        <button id="Refresh">Refrescar</button>
+        <button id="newHand">Nueva mano</button>
 
+        <!-- Divs para mostrar imágenes -->
+        <div id="cards">
+            <div id="showCard0"></div>
+            <div id="showCard1"></div>
+            <div id="showCard2"></div>
+            <div id="showCard3"></div>
+            <div id="showCard4"></div>
+        </div>
 
-    <!-- Divs para mostrar imágenes -->
-    <div id="cards">
-        <div id="showCard0"></div>
-        <div id="showCard1"></div>
-        <div id="showCard2"></div>
-        <div id="showCard3"></div>
-        <div id="showCard4"></div>
+        <div id="outcome"></div>
     </div>
-
-    <div id="outcome"></div>
 
 </body>
 
