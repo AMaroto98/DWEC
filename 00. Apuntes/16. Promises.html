@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises</title>
+  </head>
+  <body>
+    <script>
+      // Promises
+
+      /*
+        Una promise es un objeto para representar un comportamiento asíncrono.
+        Una promise tiene 3 estados:
+
+        1. Pending (Pendiente)
+        2. Fullfilled (Completado)
+        3. Rejected (Rechazado)
+        
+
+        La variable x estará en estado Pending hasta que se llame a resolve o a rejected.
+        */
+
+      const x = new Promise(function (resolve, rejected) {});
+
+      // Cuando se acaba la promesa se llama al método
+      // - then --> Si hay finalizado bien (resolve)
+      // - catch --> Si ha ido mal (rejected)
+
+      const wait = new Promise(function (resolve, rejected) {
+        setTimeout(() => {
+          resolve("Finalizó bien!");
+          // rejected("Finalizó mal");
+        }, 5000);
+      })
+        .then(function (valor) {
+          console.log("Ha entrado en el then ", valor);
+          console.log("Resuelta", wait);
+        })
+        .catch(function (valor) {
+          console.log("Ha entrado en el Catch", valor);
+        });
+
+      console.log(wait);
+
+      setTimeout(() => {
+        console.log("Después resolve", wait);
+        // rejected("Finalizó mal");
+      }, 8000);
+
+      //   AJAX Fetch (ES6)
+      //   Fetch por defecto método GET
+      fetch("http://95.39.145.183/ejercicios/color.php?min=400&max=700", {
+        method: "GET",
+        // Primer then recibimos respuesta y como la queremos devolver
+      })
+        .then(function (respuesta1) {
+          /*
+        respuesta1.text(); texto plano
+        respuesta2.json(): JSON
+        respuesta1.blob(): archivo binario
+        */
+
+          return respuesta1.json();
+        })
+        .then(function (respuesta2) {
+          console.log("respuesta2", respuesta2);
+        });
+
+      // Lo de arriba pero mucho más optimizado
+      fetch("http://95.39.145.183/ejercicios/color.php?min=400&max=700")
+        .then(r => r.json())
+        .then(respuesta => console.log("Respuesta2", respuesta));
+
+        // Con POST NO FUNCIONA PORQUE ESA URL SOLO VA CON GET
+        fetch("http://95.39.145.183/ejercicios/color.php?", {
+            method: "POST",
+            body: "min=400&max=700",
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(r => r.json())
+        .then(respuesta => console.log("Respuesta2", respuesta2));
+        
+    </script>
+  </body>
+</html>
