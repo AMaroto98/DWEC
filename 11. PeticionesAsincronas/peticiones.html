@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10 Peticiones</title>
+  </head>
+  <body>
+    <div id="resultado"></div>
+
+    <script>
+      /*
+      10 Peticiones asincronas pintarlas en orden.
+      http://34.90.153.139/ejercicios/asincrono.php?num1
+      Method: GET
+      Return: 
+      Params : numerico
+      
+      */
+      const promises = [];
+
+      for (let i = 1; i < 10; i++) {
+        const promise = fetch(
+          "http://34.90.153.139/ejercicios/asincrono.php?num=" + i,
+          {}
+        ).then(function (respuesta1) {
+          return respuesta1.text();
+        });
+
+        promises.push(promise);
+      }
+
+      Promise.all(promises).then(function (arrayResponses) {
+        arrayResponses.forEach((response) => {
+          document.getElementById("resultado").innerHTML += response + "<br>";
+        });
+      });
+    </script>
+  </body>
+</html>
