@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColoresV2</title>
+  </head>
+  <body>
+
+    <div id="cuadrado"></div>
+    <script>
+
+      fetch("http://95.39.145.183/ejercicios/color.php?min=200&max=400", {
+      })
+        .then(function (respuesta1) {
+          return respuesta1.json();
+        })
+        .then(function (respuesta2) {
+
+            const obj = respuesta2;
+            const body = document.querySelector("body");
+            body.style.backgroundColor = obj.background;
+            
+            const cuadrado = document.getElementById("cuadrado");
+            cuadrado.style.width = obj.width + "px";
+            cuadrado.style.height = obj.height + "px";
+            cuadrado.style.background = obj.color;
+            
+        });
+    </script>
+  </body>
+</html>
