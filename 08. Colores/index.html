@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colores</title>
+</head>
+<body>
+
+    <div id="rectangulo"></div>
+
+    <script>
+
+        // GET
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+
+                const obj = JSON.parse(this.responseText);
+                console.log(obj);
+                
+                let body = document.querySelector("body");
+                body.style.backgroundColor = obj.background;   
+
+                let div = document.querySelector("#rectangulo"); 
+                div.style.backgroundColor = obj.color;
+                div.style.width = obj.width + "px";
+                div.style.height = obj.height + "px";
+
+            }
+        }
+
+        xhttp.open("GET", "http://95.39.145.183/ejercicios/color.php?min=400&max=700");
+        xhttp.send();
+
+    </script>
+    
+</body>
+</html>
