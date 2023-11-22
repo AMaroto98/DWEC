@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      /*
+        Crea una tabla en html de usuarios recuperando los datos de:
+        URL: http://95.39.145.183/ejercicios/usuarios.php
+        
+        Cloud: http://34.147.66.205/ejercicios/usuarios.php
+
+        Método: GET
+        Response: JSON Usuarios
+
+        Tabla: Username, Name, Surname y Sex
+        
+        */
+
+      //   function getUsers(color, background, width) {
+      //     fetch("http://95.39.145.183/ejercicios/usuarios.php", {})
+      //       .then(function (respuesta1) {
+      //         return respuesta1.json();
+      //       })
+      //       .then(function (respuesta2) {
+      //         const data = respuesta2;
+      //         console.log("lista: ", data);
+
+      // const table = document.querySelector("table");
+      // table.style.color = color;
+      // table.style.backgroundColor = background;
+      // table.style.fontSize = width + "px";
+
+      // let infoToInsert = "";
+
+      // data.forEach((user) => {
+      //   let username = user.username;
+      //   let name = user.name;
+      //   let surname = user.surname;
+      //   let sex = user.sex;
+
+      //   infoToInsert +=
+      //     "<tr><td>" +
+      //     username +
+      //     "</td>" +
+      //     "<td>" +
+      //     name +
+      //     "</td>" +
+      //     "<td>" +
+      //     surname +
+      //     "</td>" +
+      //     "<td>" +
+      //     sex +
+      //     "</td> </tr>";
+      // });
+
+      // table.innerHTML += infoToInsert;
+      //       });
+      //   }
+
+      //   function printTable() {
+      //     fetch("http://95.39.145.183/ejercicios/color.php?min=10&max=20", {})
+      //       .then(function (respuesta1) {
+      //         return respuesta1.json();
+      //       })
+      //       .then(function (respuesta2) {
+      //         const color = respuesta2;
+      //         getUsers(color.color, color.background, color.width);
+      //       });
+      //   }
+
+      /*
+
+      Promise.all(arrayDePromesas).then(array de respuestas)
+
+      Promise.all espera a que todas las peticiones acaben correctamente
+      
+      */
+
+      function pintarTabla(color, users) {
+        const table = document.querySelector("table");
+        table.style.color = color.color;
+        table.style.backgroundColor = color.background;
+        table.style.fontSize = color.width + "px";
+
+        let infoToInsert = "";
+
+        users.forEach((user) => {
+          let username = user.username;
+          let name = user.name;
+          let surname = user.surname;
+          let sex = user.sex;
+
+          infoToInsert +=
+            "<tr><td>" +
+            username +
+            "</td>" +
+            "<td>" +
+            name +
+            "</td>" +
+            "<td>" +
+            surname +
+            "</td>" +
+            "<td>" +
+            sex +
+            "</td> </tr>";
+        });
+
+        table.innerHTML += infoToInsert;
+      }
+      const colorPromise = fetch(
+        "http://95.39.145.183/ejercicios/color.php?min=10&max=20",
+        {}
+      ).then(function (respuesta1) {
+        return respuesta1.json();
+      });
+
+      const userPromise = fetch(
+        "http://95.39.145.183/ejercicios/usuarios.php",
+        {}
+      ).then(function (respuesta1) {
+        return respuesta1.json();
+      });
+
+      Promise.all([colorPromise, userPromise]).then(function (arrayResponses) {
+        const color = arrayResponses[0];
+        const users = arrayResponses[1];
+
+        pintarTabla(color, users);
+      });
+
+    </script>
+
+    
+
+    <table>
+      <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Sex</th>
+      </tr>
+    </table>
+
+  </body>
+</html>
