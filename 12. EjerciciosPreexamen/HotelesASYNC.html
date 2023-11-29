@@ -22,7 +22,7 @@
 
   <body>
     <script>
-      /* 
+      /*
             Fer una petició a hoteles.php i recuperar la llista d'hotels per tal de
             crear tants botons com hotels ens retorni el servei. URL:
             http://34.90.153.139/ejercicios/hoteles.php Mètode: GET Retorna: JSON amb
@@ -31,58 +31,60 @@
             Quan cliquem al botó de l'hotel hem de fer una petició a hotelinfo.php que
             ens retornarà la informació de l'hotel i la pintarem per pantalla URL:
             http://34.90.153.139/ejercicios/hotelinfo.php Mètode: POST Paràmetres: id
-            (numèric) Retorna: JSON amb informació de l'hotel 
+            (numèric) Retorna: JSON amb informació de l'hotel
         */
+
       cargarHoteles();
 
       async function cargarHoteles() {
-        await fetch("http://34.90.153.139/ejercicios/hoteles.php", {})
-          .then(function (hoteles) {
-            return hoteles.json();
-          })
-          .then(function (hoteles) {
-            hoteles.forEach((hotel) => {
-              const nuevoBoton = document.createElement("button");
-              nuevoBoton.textContent = hotel.nombre;
-              nuevoBoton.id = hotel.id;
-              document.querySelector("body").appendChild(nuevoBoton);
+        const hotelesFetch = await fetch(
+          "http://34.90.153.139/ejercicios/hoteles.php",
+          {}
+        );
+        const hoteles = await hotelesFetch.json();
+        hoteles.forEach((hotel) => {
+          const nuevoBoton = document.createElement("button");
+          nuevoBoton.textContent = hotel.nombre;
+          nuevoBoton.id = hotel.id;
+          document.querySelector("body").appendChild(nuevoBoton);
 
-              nuevoBoton.addEventListener("click", function () {
-                datosHotel(hotel.id);
-              });
-              console.log(hotel);
-            });
+          nuevoBoton.addEventListener("click", function () {
+            datosHotel(hotel.id);
           });
+          console.log(hotel);
+        });
       }
 
       async function datosHotel(hotelId) {
-        await fetch("http://34.90.153.139/ejercicios/hotelinfo.php", {
-          method: "POST",
-          body: "id=" + hotelId,
-          headers: { "Content-type": "application/x-www-form-urlencoded" },
-        })
-          .then(function (informacion) {
-            return informacion.json();
-          })
-          .then(function (informacion) {
-            console.log(informacion);
+        const informacionFetch = await fetch(
+          "http://34.90.153.139/ejercicios/hotelinfo.php",
+          {
+            method: "POST",
+            body: "id=" + hotelId,
+            headers: { "Content-type": "application/x-www-form-urlencoded" },
+          }
+        );
+        const informacion = await informacionFetch.json();
 
-            let nombre = informacion.nombre;
-            let direccion = informacion.direccion;
-            let nHabitaciones = informacion.num_habitaciones;
-            let nPlantas = informacion.num_plantas;
-            let servicios = informacion.servicios;
-            let parking = informacion.tiene_parking;
+        let nombre = informacion.nombre;
+        let direccion = informacion.direccion;
+        let nHabitaciones = informacion.num_habitaciones;
+        let nPlantas = informacion.num_plantas;
+        let servicios = informacion.servicios;
+        let parking = informacion.tiene_parking;
 
-            generarTabla(
-              nombre,
-              direccion,
-              nHabitaciones,
-              nPlantas,
-              servicios,
-              parking
-            );
-          });
+        const contenedorTablas = document.createElement("div");
+        contenedorTablas.id = "contenedorTablas";
+        document.body.appendChild(contenedorTablas);
+
+        generarTabla(
+          nombre,
+          direccion,
+          nHabitaciones,
+          nPlantas,
+          servicios,
+          parking
+        );
       }
 
       function generarTabla(
@@ -103,7 +105,7 @@
         tabla += "<td>" + servicios + "</td>";
         tabla += "<td>" + parking + "</td></tr>";
 
-        document.querySelector("body").innerHTML += tabla;
+        document.getElementById("contenedorTablas").innerHTML += tabla;
       }
     </script>
   </body>
