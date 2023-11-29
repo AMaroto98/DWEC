@@ -126,14 +126,14 @@
         table.innerHTML += infoToInsert;
       }
       const colorPromise = fetch(
-        "http://95.39.145.183/ejercicios/color.php?min=10&max=20",
+        "http://34.90.153.139/ejercicios/color.php?min=10&max=20",
         {}
-      ).then(function (respuesta1) {
+      ).then(function (respuesta1) {  
         return respuesta1.json();
       });
 
       const userPromise = fetch(
-        "http://95.39.145.183/ejercicios/usuarios.php",
+        "http://34.90.153.139/ejercicios/usuarios.php",
         {}
       ).then(function (respuesta1) {
         return respuesta1.json();

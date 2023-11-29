@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async - Await</title>
+  </head>
+  <body>
+    <div id="resultado"></div>
+    <script>
+      /*
+        ES8 --> async Await
+        
+        // Tanto async como await son palabras reservadas para resolver promesas.Async
+        // Cuando una función devuelve una promesa la podemos esperar con un "await";
+        
+        // const peticion = await fecth("http://...");
+
+        // Perooooooo!!!
+
+        // Si usamos await la función debe ser async!!!!
+        */
+
+      function getColor() {
+        fetch("http://34.90.153.139/ejercicios/color.php?min=30&max=50")
+          .then((r) => r.json())
+          .then((respuesta) => {
+            console.log("Respuesta: ", respuesta);
+          });
+      }
+
+      // La ventaja que tiene respecto lo anterior es que no estamos encerrados en la función de callback
+      // SI se pone await la función tiene que ser asincrona
+      async function getColorConAsyncAwait() {
+        const colorFectch = await fetch(
+          "http://34.90.153.139/ejercicios/color.php?min=30&max=50"
+        );
+        const color = await colorFectch.json();
+        console.log("Respuesta await: ", color);
+      }
+
+    //   getColor();
+    //   getColorConAsyncAwait();
+
+      /*
+        Consideraciones importantes cuando usamos async await
+
+        1- await espera a acabar la promesa para continuar el código
+        2- Resuelve el problema de estar encerrados en la función del ámbito (scope) porque la respuesta se encuentra en el mismo ámbito que de visibilidad.
+        3- OJO con los bucles (tardarán más)
+        */
+
+      function asincronoSinAsyncAwait() {
+        for (let i = 1; i < 10; i++) {
+          fetch("http://34.90.153.139/ejercicios/asincrono.php?num=" + i)
+            .then((r) => r.text())
+            .then((respuesta) => {
+              document.getElementById("resultado").innerHTML +=
+                respuesta + "<br>";
+            });
+        }
+      }
+
+      async function asincronoConAsyncAwait(params) {
+        for (let i = 1; i < 10; i++) {
+          const numeroFecth = await fetch(
+            "http://34.90.153.139/ejercicios/asincrono.php?num=" + i
+          );
+          const color = await numeroFecth.text();
+          document.getElementById("resultado").innerHTML += color + "<br>";
+        }
+      }
+
+    //   asincronoSinAsyncAwait();
+    //   asincronoConAsyncAwait();
+
+      //   Manera para lanzar el async await todas las peticiones a la vez
+      
+
+
+      async function asincronoConAsyncAwait2() {
+        const promises = [];
+
+        for (let i = 1; i < 10; i++) {
+            const numeroFecth = fetch("http://34.90.153.139/ejercicios/asincrono.php?num=" + i);
+            promises.push(numeroFecth);
+        }
+
+        // Promise.all(promises).then(async function(responses) {
+
+        //     // Con for normal
+        //     for (let i = 0; i < responses.length; i++) {
+        //         const res = await responses[i].text();
+        //         document.getElementById("resultado").innerHTML += res + "<br>";      
+        //     }
+
+        //     // Con foreach
+        //     responses.forEach(async function(element) {
+        //         const res = await element.text();
+        //         document.getElementById("resultado").innerHTML += res + "<br>";
+        //     });
+        // })
+
+        const responses = await Promise.all(promises)
+        for (let i = 0; i < responses.length; i++) {
+            const res = await responses[i].text();
+            document.getElementById("resultado").innerHTML += res + "<br>";
+            
+        }
+      }
+
+      asincronoConAsyncAwait2();
+
+
+    </script>
+  </body>
+</html>

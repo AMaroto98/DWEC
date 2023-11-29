@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+            /*
+              Fer una petició a hoteles.php i recuperar la llista d'hotels per tal de crear tants botons com hotels ens retorni el servei.
+
+              URL: http://34.90.153.139/ejercicios/hoteles.php
+              Mètode:  GET
+              Retorna:  JSON amb una lista de hotels
+
+              ------------------------------------------------------------------------------------------
+
+              Quan cliquem al botó de l'hotel hem de fer una petició a hotelinfo.php que ens retornarà la informació de l'hotel i la pintarem per pantalla
+
+              URL: http://34.90.153.139/ejercicios/hotelinfo.php
+              Mètode: POST
+              Paràmetres: id (numèric)
+              Retorna: JSON amb informació de l'hotel
+
+              */
+
+            const fetchHoteles = fetch(
+              "http://34.90.153.139/ejercicios/hoteles.php",
+              {}
+            ).then(function (respuesta) {
+              return respuesta.json();
+            });
+
+            Promise.all([fetchHoteles]).then(function (response) {
+              const hoteles = response[0];
+
+              hoteles.forEach((hotel) => {
+                const nuevoBoton = document.createElement("button");
+                nuevoBoton.textContent = hotel.nombre;
+                nuevoBoton.id = hotel.id;
+                document.querySelector("body").appendChild(nuevoBoton);
+
+                nuevoBoton.addEventListener("click", function () {
+                  datosHotel(hotel.id);
+                });
+
+                console.log(hotel);
+              });
+
+              function datosHotel(hotelId) {
+                const fetchInfo = fetch(
+                  "http://34.90.153.139/ejercicios/hotelinfo.php",
+                  {
+                    method: "POST",
+                    body: "id=" + hotelId,
+                    headers: { "Content-type": "application/x-www-form-urlencoded" },
+                  }
+                ).then(function (respuesta) {
+                  return respuesta.json();
+                });
+
+                Promise.all([fetchInfo]).then(function (response) {
+                  const informacion = response[0];
+                //   console.log(informacion);
+
+                  let nombre = informacion.nombre;
+                  let direccion = informacion.direccion;
+                  let nHabitaciones = informacion.num_habitaciones;
+                  let nPlantas = informacion.num_plantas;
+                  let servicios = informacion.servicios;
+                  let parking = informacion.tiene_parking;
+
+                    generarTabla(nombre, direccion, nHabitaciones, nPlantas, servicios, parking);
+                });
+              }
+            });
+
+
+            function generarTabla(nombre, direccion, nHabitaciones, nPlantas, servicios, parking) {
+
+                const tabla = document.createElement('table');
+                tabla.border = 1;
+
+                const encabezado = tabla.createTHead().insertRow(0);
+                const encabezadoCell1 = encabezado.insertCell(0);
+                encabezadoCell1.textContent = 'Nombre';
+                const encabezadoCell2 = encabezado.insertCell(1);
+                encabezadoCell2.textContent = 'Dirección';
+                const encabezadoCell3 = encabezado.insertCell(2);
+                encabezadoCell3.textContent = 'Nº Habitaciones';
+                const encabezadoCell4 = encabezado.insertCell(3);
+                encabezadoCell4.textContent = 'Nº Plantas';
+                const encabezadoCell5 = encabezado.insertCell(4);
+                encabezadoCell5.textContent = 'Servicios';
+                const encabezadoCell6 = encabezado.insertCell(5);
+                encabezadoCell6.textContent = 'Parking';
+
+                const filaDatos = tabla.insertRow(1);
+                const celdaNombre = filaDatos.insertCell(0);
+                celdaNombre.textContent = nombre;
+                const celdaDireccion = filaDatos.insertCell(1);
+                celdaDireccion.textContent = direccion;
+                const celdaNHabitaciones = filaDatos.insertCell(2);
+                celdaNHabitaciones.textContent = nHabitaciones;
+                const celdaNPlantas = filaDatos.insertCell(3);
+                celdaNPlantas.textContent = nPlantas;
+                const celdaServicios = filaDatos.insertCell(4);
+                celdaServicios.textContent = servicios.join(', ');
+                const celdaParking = filaDatos.insertCell(5);
+                celdaParking.textContent = parking ? 'Sí' : 'No';
+
+                document.body.appendChild(tabla);
+            }
+    </script>
+  </body>
+</html>
