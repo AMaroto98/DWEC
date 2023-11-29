@@ -112,6 +112,21 @@
 
                 document.body.appendChild(tabla);
             }
+
+            function generarTabla(nombre, direccion, nHabitaciones, nPlantas, servicios, parking) {
+
+              const tabla = "<table><tr><th>Nombre</th><th>Dirección</th><th>Nº Habitaciones</th><th>Nº Plantas</th><th>Servicios</th><th>Parking</th></tr>";
+
+              tabla += "<tr><td>" + nombre + "</td>";
+              tabla += "<td>" + direccion + "</td>";
+              tabla += "<td>" + nHabitaciones + "</td>";
+              tabla += "<td>" + nPlantas + "</td>";
+              tabla += "<td>" + servicios + "</td>";
+              tabla += "<td>" + parking + "</td></tr>";
+
+              document.querySelector("body").appendChild(tabla);
+
+            }
     </script>
   </body>
 </html>

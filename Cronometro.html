@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span id="crono">00:00:00</span> <br />
+    <button id="play" onclick="play()">Play</button>
+    <button id="pause" onclick="pause()">Pause</button>
+    <button id="stop" onclick="stopCrono()">Stop</button>
+
+    <script>
+        
+      var crono;
+      var cronoDif;
+      var interval;
+
+      function play() {
+        if (!crono) {
+          crono = Date.now();
+        }
+
+        interval = setInterval(function () {
+          cronoDif = Date.now();
+          var dif = cronoDif - crono;
+
+          var dateDif = new Date(dif);
+
+          var result = "";
+          result += dateDif.getHours() - 1;
+          result += ":";
+          result += dateDif.getMinutes();
+          result += dateDif.getSeconds();
+          result += ":";
+          result += dateDif.getMilliseconds();
+          document.querySelector("#crono").innerHTML = result;
+        }, 100);
+      }
+
+      function pause() {
+        clearInterval(interval);
+      }
+
+      function stopCrono() {
+        crono = false;
+        document.querySelector("#crono").innerHTML = "00:00:00";
+        clearInterval(interval);
+      }
+    </script>
+  </body>
+</html>

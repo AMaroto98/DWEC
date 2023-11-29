@@ -50,7 +50,7 @@
 
       //   AJAX Fetch (ES6)
       //   Fetch por defecto método GET
-      fetch("http://95.39.145.183/ejercicios/color.php?min=400&max=700", {
+      fetch("http://34.90.153.139/ejercicios/color.php?min=400&max=700", {
         method: "GET",
         // Primer then recibimos respuesta y como la queremos devolver
       })
@@ -68,20 +68,20 @@
         });
 
       // Lo de arriba pero mucho más optimizado
-      fetch("http://95.39.145.183/ejercicios/color.php?min=400&max=700")
+      fetch("http://34.90.153.139/ejercicios/color.php?min=400&max=700")
         .then(r => r.json())
         .then(respuesta => console.log("Respuesta2", respuesta));
 
-        // Con POST NO FUNCIONA PORQUE ESA URL SOLO VA CON GET
-        fetch("http://95.39.145.183/ejercicios/color.php?", {
-            method: "POST",
-            body: "min=400&max=700",
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded"
-            }
-        })
-        .then(r => r.json())
-        .then(respuesta => console.log("Respuesta2", respuesta2));
+        // CON POST NO FUNCIONA PORQUE ESA URL SOLO VA CON GET PERO ES UN EJEMPLO PARA VER EL CUERPO QUE TENDRÍA LA PETICIÓN.
+        // fetch("http:/34.90.153.139/ejercicios/color.php?", {
+        //     method: "POST",
+        //     body: "min=400&max=700",
+        //     headers: {
+        //         "Content-type": "application/x-www-form-urlencoded"
+        //     }
+        // })
+        // .then(r => r.json())
+        // .then(respuesta => console.log("Respuesta2", respuesta2));
         
     </script>
   </body>

@@ -88,6 +88,7 @@
                 // const j = i + 3;
                 console.log("i " + i + " j " + j);
             }
+            // El scope es de bloque por lo que dará un error de que i no está definida
             // console.log("i final " + i + " j final " + j);
 
         }
@@ -109,12 +110,12 @@
         redeclare();
 
 
-        // HOISTING
+        // HOISTING --> Se aplica solo a funciones y var, no a let y const
         // Aparece cuando no se declara un var;
         function hosting() {
             var h1 = "no hoisted";
             h2 = "hoisted"; 
-            // El h2 se declara laa variable arriba del todo y se hace global sin yo decirselo, es automático
+            // El h2 se declara la variable arriba del todo y se hace global sin yo decirselo, es automático
             console.log("hoist: " + h1, h2);
         }
 
@@ -204,11 +205,9 @@
         }));
 
         // Sin llaves
-        console.log(operacion(3, 4,(a,b)=> a - b));
+        console.log(operacion(3, 4,(a,b) => a - b));
 
         console.log(operacion(3, 4, a => a - a));
-
-
 
 
     </script>
