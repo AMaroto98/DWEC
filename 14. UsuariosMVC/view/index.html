@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios</title>
+
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+        }
+  
+        td,
+        th {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 8px;
+        }
+      </style>
+  </head>
+  <body>
+    <script type="module">
+      import { getUsers } from "../service/UserService.js";
+      import { printTable } from "../service/UserService.js";
+
+      async function init() {
+        const users = await getUsers();
+        printTable(users);
+      }
+
+      (function () {
+        init();
+      })();
+    </script>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Surname</th>
+      </tr>
+    </table>
+  </body>
+</html>
