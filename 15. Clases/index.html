@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class</title>
+  </head>
+  <body>
+    <script>
+      // 1. ¿Cómo se crea una clase?
+      // En JS una clase su crea utilizando la palabra clave "class"
+
+      class Gato {}
+
+      // 2. ¿Cómo afecta el this?
+      // This hace referencia a la instancia de la clase
+
+      // 3. ¿Cómo crear un constructor?
+
+      class Coche {
+        constructor(marca, modelo) {
+          this._marca = marca;
+          this.modelo = modelo;
+        }
+
+        // 4. Implementar get y set
+
+        get marca() {
+          return this._marca;
+        }
+
+        set marca2(nuevaMarca) {
+          this._marca = nuevaMarca;
+        }
+      }
+
+      miCoche = new Coche("Toyota", "Camry");
+
+      console.log(miCoche.marca);
+      miCoche.marca2 = "Yaris";
+      console.log(miCoche.marca);
+
+      // 5. ¿Cómo crear propiedades privadas y crear métodos para publicarlas?
+
+      // Para crear propiedades privadas se pone _ delante, con mi ejemplo del coche anterior se ve bien, la propiedad privada es marca y si quiero acceder a ella uso el getter marca
+
+      // 6. Declarar un método estático
+
+      class Utilidades {
+        static sumar(a, b) {
+          return a + b;
+        }
+      }
+
+      const resultado = Utilidades.sumar(3, 7);
+      console.log(resultado); // Resultado: 10
+
+      // Función constructora, no es una clase, era la forma antigua de definir objetos
+      function Person(name, surename) {
+        this.name = name;
+        this.surename = surename;
+        this.fullName = function () {
+          return this.name + " " + this.surename;
+        };
+      }
+
+      var jaume = new Person("Jaume", "Torrens");
+
+      //   ¿Qué diferencia hay entonces entre una clase y una función constructora?
+
+      // Sintaxis:
+
+      // La sintaxis de la clase (class) es más moderna y proporciona una forma más clara y concisa de definir clases.
+      // La función constructora utiliza la antigua forma de definir objetos y es menos expresiva que la sintaxis de clase.
+
+      // Métodos:
+
+      // En la clase, los métodos se definen fuera del constructor utilizando la sintaxis de método.
+      // En la función constructora, los métodos se definen dentro del constructor, lo que significa que cada instancia de la clase tiene su propia copia del método.
+
+      // Usabilidad:
+
+      // Las clases suelen considerarse más legibles y estructuradas, especialmente cuando hay herencia y métodos estáticos involucrados.
+      // Las funciones constructoras pueden parecer menos organizadas, ya que todos los métodos se definen dentro del constructor.
+
+      // Ejemplo de herencia
+
+      class Persona {
+        constructor(nombre, edad) {
+          this.nombre = nombre;
+          this.edad = edad;
+        }
+
+        get nombreCompleto() {
+          return this.nombre;
+        }
+      }
+
+      class Profesor extends Persona {
+        constructor(nombre, edad, especialidad) {
+          super(nombre, edad);
+          this.especialidad = especialidad;
+        }
+      }
+
+      const profesor = new Profesor("Juan", 35, "Matemáticas");
+
+
+      console.log(profesor.nombre); 
+      console.log(profesor.edad); 
+      console.log(profesor.nombreCompleto); 
+      console.log(profesor.especialidad);
+    </script>
+  </body>
+</html>
