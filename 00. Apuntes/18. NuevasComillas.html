@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="resultado"></div>
+
+    <script>
+
+        // Hasta ahora '' ""
+        // Nuevas: ``
+
+        // Ventajas:
+        // Permiten el uso de '' y "" dentro
+        // Evitan concatenaciones y queda más claro el código
+        // Permiten escribir variables sin cerrar comillas
+        // Son multilínea
+
+        const a = "Es un string" +
+        "multininea" +
+        "ree";
+
+        const a2 = `Es un string
+        multinea
+        guay` ;
+
+        // Para enlaces:
+        document.querySelector("#resultado").innerHTML = '<a href="index.html">Esto es un link</a>';
+        // document.querySelector("#resultado").innerHTML = '<a href="index.html">It's a link</a>';
+        
+        document.querySelector("#resultado").innerHTML = `<a href="index.html">Esto es un link</a>`;
+
+        const url = "index.html";
+        const text = "esto es un link";
+
+        // Dobles
+        document.querySelector("#resultado").innerHTML = "<a href=" + url + ">" + text + "</a>";
+
+        // Simples
+        document.querySelector("#resultado").innerHTML = '<a href=' + url + '>' + text + '</a>';
+
+        // Nuevas
+        document.querySelector("#resultado").innerHTML = `<a href=${url}>${text}</a>`;
+
+        // Desventajas: Los navegadores antiguos no lo admiten
+
+    </script>
+
+    <!-- Ejercicio clases
+
+        CLASS -> Como se crea una clase en JS
+        Cómo afecta el this?
+        crear un constructor
+        Implementar get y set
+        Propiedades privadas, declararla y acceder, crear métodos para publicarlas
+        declarar un método estático
+
+        Ejemplo-> Persona
+            Profesor que heredará de Perosna 
+    
+    
+    
+    -->
+</body>
+
+</html>
