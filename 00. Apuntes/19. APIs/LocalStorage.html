@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+</head>
+<body>
+
+    <script>
+        localStorage.setItem("name", "Antonio");
+        localStorage.setItem("surname", "Maroto");
+
+
+        let name = localStorage.getItem("name");
+        console.log(name);
+        
+
+        localStorage.removeItem("surname");
+
+        function Persona(name, surname) {
+            this.name = name;
+            this.surname = surname
+        }
+
+        const antonio = new Persona("Antonio", "Maroto");
+        localStorage.setItem("ObjetoAntonio", antonio);
+        localStorage.setItem("ObjetoAntonio2", JSON.stringify(antonio));
+
+        const antonioRecuperado = localStorage.getItem("ObjetoAntonio");
+        const antonioRecuperado2 = JSON.parse(localStorage.getItem("ObjetoAntonio2"));
+
+        console.log(antonioRecuperado);
+        console.log(antonioRecuperado2);
+
+        // Para guardar objetos: Para meter usar stringify y para sacar un parse
+
+
+
+    </script>
+    
+</body>
+</html>
