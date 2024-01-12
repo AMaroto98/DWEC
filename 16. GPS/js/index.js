@@ -19,10 +19,22 @@ function initMap() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          console.log(position);
           const pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
+
+          new google.maps.Circle({
+            strokeColor: "#FFFF00",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FFFF00",
+            fillOpacity: 0.35,
+            map,
+            center: pos,
+            radius: Math.sqrt(position.coords.accuracy) * 100,
+          });
 
           saveLocation(locations, pos);
           printLocations();
@@ -71,7 +83,7 @@ function printLocations() {
   // console.log(recoverLocations);
 
   // Elimino del mapa los posibles marcadores que pueda haber
-  markers.forEach(marker => {
+  markers.forEach((marker) => {
     marker.setMap(null);
   });
 
@@ -98,6 +110,7 @@ function printLocations() {
     // Genero un marcador y en sus propiedades establezco la position, map y el title
     const marker = new google.maps.Marker({
       position: pos,
+      icon: "/images/icono.png",
       map: map,
       title: "Saved Location",
     });
@@ -107,8 +120,15 @@ function printLocations() {
 
     // Pinto los últimos 5 markers mediante el setMap
     const lastFiveMarkers = markers.slice(-5);
-    lastFiveMarkers.forEach(marker => {
+    lastFiveMarkers.forEach((marker) => {
       marker.setMap(map);
+    });
+
+    // Añado información al clickar sobre la ubicación
+    marker.addListener("click", () => {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent("Hola");
+      infoWindow.open(map, marker);
     });
   });
 }
