@@ -26,6 +26,7 @@ function initMap() {
             lng: position.coords.longitude,
           };
 
+          // Pintar círculo
           new google.maps.Circle({
             strokeColor: "#FFFF00",
             strokeOpacity: 0.8,
@@ -36,11 +37,26 @@ function initMap() {
             center: pos,
             radius: Math.sqrt(position.coords.accuracy) * 100,
           });
+
+          const latlng = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          geocoder
+            .geocode({ location: latlng })
+            .then((response) => {
+              console.log(response);
+              infoWindow.setContent(response.results[0].formatted_address);
+              // return response;
+            })
+            .catch((e) => window.alert("Geocoder failed due to: " + e));
+
           saveLocation(locations, pos);
           printLocations();
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent("Location found.");
+          // infoWindow.setContent("Location found.");
           infoWindow.open(map);
           map.setCenter(pos);
         },
@@ -133,9 +149,7 @@ function printLocations() {
   });
 }
 
-
-function geocodeLatLng(geocoder, map, infowindow, position) {
-
+function geocodeLatLng(geocoder, position) {
   const latlng = {
     lat: position.coords.latitude,
     lng: position.coords.longitude,
@@ -144,19 +158,8 @@ function geocodeLatLng(geocoder, map, infowindow, position) {
   geocoder
     .geocode({ location: latlng })
     .then((response) => {
-      if (response.results[0]) {
-        map.setZoom(11);
-
-        const marker = new google.maps.Marker({
-          position: latlng,
-          map: map,
-        });
-
-        infowindow.setContent(response.results[0].formatted_address);
-        infowindow.open(map, marker);
-      } else {
-        window.alert("No results found");
-      }
+      console.log(response);
+      return response;
     })
     .catch((e) => window.alert("Geocoder failed due to: " + e));
 }
