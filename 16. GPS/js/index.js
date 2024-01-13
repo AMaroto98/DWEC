@@ -8,6 +8,7 @@ function initMap() {
     zoom: 6,
   });
 
+  const geocoder = new google.maps.Geocoder();
   infoWindow = new google.maps.InfoWindow();
 
   const locationButton = document.createElement("button");
@@ -35,7 +36,6 @@ function initMap() {
             center: pos,
             radius: Math.sqrt(position.coords.accuracy) * 100,
           });
-
           saveLocation(locations, pos);
           printLocations();
 
@@ -131,6 +131,34 @@ function printLocations() {
       infoWindow.open(map, marker);
     });
   });
+}
+
+
+function geocodeLatLng(geocoder, map, infowindow, position) {
+
+  const latlng = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude,
+  };
+
+  geocoder
+    .geocode({ location: latlng })
+    .then((response) => {
+      if (response.results[0]) {
+        map.setZoom(11);
+
+        const marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+        });
+
+        infowindow.setContent(response.results[0].formatted_address);
+        infowindow.open(map, marker);
+      } else {
+        window.alert("No results found");
+      }
+    })
+    .catch((e) => window.alert("Geocoder failed due to: " + e));
 }
 
 window.initMap = initMap;
