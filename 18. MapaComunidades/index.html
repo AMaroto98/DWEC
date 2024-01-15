@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Mapa de España</title>
+</head>
+<body>
+
+    <script src="js/main.js"></script>
+
+    <!-- Comunidades autónomas para colocar -->
+    <img src="assets/img/castellalamanxa.png" alt="castillaLaMancha" draggable="true" ondragstart="drag(event)" data-community="castillaLaMancha">
+    <img src="assets/img/andalucia.png" alt="andalucia" draggable="true" ondragstart="drag(event)" data-community="andalucia">
+    <img src="assets/img/catalunya.png" alt="cataluña" draggable="true" ondragstart="drag(event)" data-community="cataluña">
+    <img src="assets/img/galicia.png" alt="galicia" draggable="true" ondragstart="drag(event)" data-community="galicia">
+
+
+    <!-- Mapa de España -->
+    <img src="assets/img/espana2.gif" usemap="#image-map">
+
+    <!-- Áreas mapeadas donde van las comunidades autónomas -->
+    <map name="image-map" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <area data-community="galicia" alt="galicia" coords="440,243,219,6" shape="rect">
+    </map>
+
+</body>
+</html>
