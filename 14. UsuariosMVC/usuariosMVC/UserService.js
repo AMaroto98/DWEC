@@ -1,14 +1,16 @@
 import { User } from "./User.js";
 
-/** ATENCION: este código se puede optimizar evitando duplicidad
- * y siguiendo SRP (Single Responsibility Principle).
- * La finalidad es comprender el asincronismo y la diferencia
- * de gestionarlo que tienen las funciones forEach y map
+/*
+ | ATENCION: este código se puede optimizar evitando duplicidad
+ | y siguiendo SRP (Single Responsibility Principle).
+ | La finalidad es comprender el asincronismo y la diferencia
+ | de gestionarlo que tienen las funciones forEach y map
  */
 
-/** En este metodo usaremos un for tradicional para resolver el problema.
- * La solicion es totalmente sincrona y por lo tanto más lenta.
- * Realizamos una petición transporte por cada usuario.
+/*
+ | En este metodo usaremos un for tradicional para resolver el problema.
+ | La solución es totalmente sincrona y por lo tanto más lenta.
+ | Realizamos una petición transporte por cada usuario.
  */
 export async function getUsersFor() {
   const usuariosFetch = await fetch(
@@ -39,8 +41,9 @@ export async function getUsersFor() {
   return resultado;
 }
 
-/** En este metodo usaremos un forEach realizando una petición
- * transporte por cada usuario
+ /*
+ | En este metodo usaremos un forEach realizando una petición
+ | transporte por cada usuario
  */
 export async function getUsersForEach() {
   const usuariosFetch = await fetch(
@@ -132,6 +135,7 @@ export async function getUsersForEachOptimized() {
     resultado.push(usuario);
   });
 
+  // Set para buscar repetidos
   const transportesDiferentes = new Set(
     resultado.map((user) => user.transporte)
   );
@@ -157,12 +161,10 @@ export async function getUsersForEachOptimized() {
 }
 
 /** Si has llegado hasta aquí, enhorabuena!! vas a ser un gran IT Software developer!!
- * y como se que te has quedado con ganas de más, te reto a realizar la siguiente función 
+ * y como se que te has quedado con ganas de más, te reto a realizar la siguiente función
  */
-export async function getUsersMapOptimized() {
+export async function getUsersMapOptimized() {}
 
-}
-
-/** FELICES FIESTAS!! 
+/** FELICES FIESTAS!!
  * https://adventofcode.com/
  */

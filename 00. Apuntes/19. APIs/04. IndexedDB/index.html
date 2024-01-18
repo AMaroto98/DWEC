@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IndexedDB</title>
+  </head>
+
+  <body>
+    <script>
+      const customerData = [
+        {
+          ssn: "444-44-4444",
+          name: "Bill",
+          age: 35,
+          email: "bill@company.com",
+        },
+        {
+          ssn: "555-55-5555",
+          name: "Donna",
+          age: 32,
+          email: "donna@home.org",
+        },
+      ];
+
+      // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+
+      const request = window.indexedDB.open("Antonio", 5);
+
+      // This event is only implemented in recent browsers
+      request.onupgradeneeded = (event) => {
+        // Save the IDBDatabase interface
+        const db = event.target.result;
+
+        // Create an objectStore for this database
+        // Object Store es como una tabla, se guardan objetos JS
+        const objectStore = db.createObjectStore("customers", {
+          keyPath: "ssn",
+        });
+
+        objectStore.createIndex("name", "name", { unique: false });
+        objectStore.createIndex("email", "email", { unique: true });
+
+        objectStore.transaction.oncomplete = (event) => {
+          const customerObjectStore = db
+            .transaction("customers", "readwrite")
+            .objectStore("customers");
+
+          // customerObjectStore.forEach(customer => {
+          //     customerObjectStore.add(customer);
+          // });
+
+          for (let i in customerData) {
+            customerObjectStore.add(customerData[i]);
+          }
+        };
+
+        // const request2 = window.indexedDB.open("Antonio", 4);
+
+        // request.onsuccess = function(e) {
+        //     const db = e.target.result;
+        //     const transaction = db.transaction('customers', 'readwrite');
+        //     const customer = transaction.objectStore('customers');
+        //     customer.add({
+
+        //         ssn: "777-77-777",
+        //         name: "Vegetta",
+        //         age: 35,
+        //         email: "vegetta@company.com",
+
+        //     });
+        // };
+      };
+
+      const request2 = window.indexedDB.open("Antonio", 4);
+
+      request2.onsuccess = function (e) {
+        const db = e.target.result;
+        const transaction = db.transaction("customers", "readwrite");
+        const customer = transaction.objectStore("customers");
+        customer.add({
+          ssn: "777-77-777",
+          name: "Vegetta",
+          age: 35,
+          email: "vegetta@company.com",
+        });
+      };
+    </script>
+  </body>
+</html>
