@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD IndexedDB</title>
+  </head>
+  <body>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre"/> <br>
+
+    <label for="color">Color:</label>
+    <input type="text" id="color"/> <br>
+
+    <button onclick="insertFruit()">Insertar fruta</button>
+    <button onclick="deleteFruit()">Borrar fruta</button>
+    <button onclick="modifyFruit()">Modificar fruta</button>
+    <button onclick="getFruits()">Mostrar frutas</button>
+    <button onclick="getGreenFruits()">Mostrar frutas verdes</button>
+
+
+    <script>
+      const db = indexedDB.open("Frutas", 1);
+
+      // Solo entra si la versión es superiror a la que hay instalada (en el navegador)
+      db.onupgradeneeded = function (ev) {
+        const dataBase = ev.target.result;
+        const frutaObjStore = dataBase.createObjectStore("Fruta", {
+          keyPath: "name",
+        });
+
+        // IndexedDB no soporta where en lo que sería SQL normal, si queremos recuperar las frutas que además sean amarillas hay que hacer indices.
+        // Nombre del indice y keyPath donde va a actuar el índice.
+        frutaObjStore.createIndex("color", "color");
+
+        frutaObjStore.add({
+          name: "Plátano",
+          color: 'amarillo'
+        });
+        frutaObjStore.add({
+          name: "Manzana",
+          color: "verde",
+        });
+      };
+
+      function insertFruit() {
+        const nombre = document.getElementById("nombre").value;
+        const color = document.getElementById("color").value;
+
+        // Se abre una transacción para comunicarse con la BD
+        // Le dices de que tipo es la transacción y ['Fruta'] es el nombre de la transacción no de la tabla
+        // Result tiene visibilidad de cuando abrimos la BD
+        const transaction = db.result.transaction(["Fruta"], "readwrite");
+        transaction.objectStore("Fruta").add({
+          name: nombre,
+          color: color,
+        });
+      }
+
+      function deleteFruit() {
+        const nombre = document.getElementById("nombre").value;
+        const transaction = db.result.transaction(["Fruta"], "readwrite");
+        transaction.objectStore("Fruta").delete(nombre);
+      }
+
+
+      function modifyFruit() {
+        const nombre = document.getElementById("nombre").value;
+        const color = document.getElementById("color").value;
+
+        const data = {
+            name: nombre,
+            color: color
+        }
+        const transaction = db.result.transaction(["Fruta"], "readwrite");
+        transaction.objectStore("Fruta").put(data);
+      }
+
+      function getFruits() {
+        const transaction = db.result.transaction(["Fruta"], "readwrite");
+        const fruitTable = transaction.objectStore("Fruta").getAll();
+
+        fruitTable.onsuccess = function (ev) {
+            const fruits = ev.target.result;
+            console.log(fruits);
+        }
+      }
+
+      function getGreenFruits() {
+        const transaction = db.result.transaction(["Fruta"], "readwrite");
+        // Con el index se accede al indice que hemos creado arriba
+        const color = transaction.objectStore("Fruta").index("color");
+
+        // Todas las frutas
+        color.getAll('verde').onsuccess = function (ev) {
+            console.log("Las frutas verdes: ", ev.target.result);
+        }
+
+        // La primera fruta verde 
+        // color.get('verde').onsuccess = function (ev) {
+        //     console.log("Las frutas verdes: ", ev.target.result);
+        // }
+      }
+
+
+      
+    </script>
+  </body>
+</html>
