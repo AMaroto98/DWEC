@@ -10,19 +10,24 @@
 
     <script src="js/main.js"></script>
 
+    
+    
+    <!-- Mapa de España -->
+    <img src="assets/img/espana2.gif" usemap="#image-map">
+    
     <!-- Comunidades autónomas para colocar -->
     <img src="assets/img/castellalamanxa.png" alt="castillaLaMancha" draggable="true" ondragstart="drag(event)" data-community="castillaLaMancha">
     <img src="assets/img/andalucia.png" alt="andalucia" draggable="true" ondragstart="drag(event)" data-community="andalucia">
     <img src="assets/img/catalunya.png" alt="cataluña" draggable="true" ondragstart="drag(event)" data-community="cataluña">
     <img src="assets/img/galicia.png" alt="galicia" draggable="true" ondragstart="drag(event)" data-community="galicia">
 
-
-    <!-- Mapa de España -->
-    <img src="assets/img/espana2.gif" usemap="#image-map">
-
+    
     <!-- Áreas mapeadas donde van las comunidades autónomas -->
     <map name="image-map" ondrop="drop(event)" ondragover="allowDrop(event)">
         <area data-community="galicia" alt="galicia" coords="440,243,219,6" shape="rect">
+        <area data-community="cataluña" alt="cataluña" coords="1293,397,1016,112" shape="rect">
+        <area data-community="andalucia" alt="andalucia" coords="359,632,885,874" shape="rect">
+        <area data-community="castillaLaMancha" alt="castillaLaMancha" coords="570,449,677,438,746,447,725,319,842,335,849,400,879,449,874,483,870,514,897,539,883,581,844,612,736,592,649,590,603,583,574,587" shape="poly">
     </map>
 
 </body>
