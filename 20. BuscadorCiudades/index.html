@@ -1,26 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
 
+  <body>
+    <h2>Buscador de ciudades</h2>
+    <input type="text" placeholder="Palma" />
 
-    <input type="search" name="" id="">
+    <div id="result"></div>
 
     <script type="module">
-        import { getCities } from "./js/main.js";
-  
-        async function init() {
-          getCities();  
-        }
-  
-        (function () {
-          init();
-        })();
-      </script>
-    
-</body>
+      (function () {
+        const openRequest = indexedDB.open("Cities", 1);
+
+        // Puede ser async dentro pero no podría ser asyn de indexeddb
+        openRequest.onupgradeneeded = async function (ev) {
+          const db = ev.target.result;
+          // Hay ciudades que se llaman igual por lo que se usa un autoincrement
+          // O se usa el como PK una propiedad del objeto o se usa autoincrement
+          db.createObjectStore("city", { autoIncrement: true });
+
+          const remoteCitiesFetch = await fetch(
+            "https://raw.githubusercontent.com/David-Haim-zz/CountriesToCitiesJSON/master/countriesToCities.json"
+          );
+
+          const remoteCities = await remoteCitiesFetch.json();
+          console.log(remoteCities);
+
+          // Keys de los objetos
+          const countries = Object.keys(remoteCities);
+          console.log(countries);
+
+          // Coge cada uno de los objetos y devuelve una array de queremos
+          const countriesObj = countries.map((country) => {
+            return {
+              country: country,
+              cities: remoteCities[country],
+            };
+          });
+          console.log(countriesObj);
+
+          const transaccion = db.transaction(["city"], "readwrite");
+          const city = transaccion.objectStore("city");
+
+          // Recorro array de objetos para insertar las ciudades
+          countriesObj.forEach((countryElement) => {
+            // Otro for each para recorrer todas las ciudades de los países
+            countryElement.cities.forEach((cityElement) => {
+              city.add({
+                ciudad: cityElement,
+                pais: countryElement.country,
+              });
+            });
+          });
+        };
+
+        document.querySelector("input").addEventListener("input", function (ev) {
+            const valor = ev.target.value;
+
+            console.log(valor);
+
+            if (valor.length >= 3) {
+              busca(valor);
+            }
+          });
+
+          function busca(valor) {
+
+            const db = openRequest.result;
+
+            // Si solo se va a leer usar readonly
+            const transaccion = db.transaction(['city'], 'readonly');
+            const city = transaccion.objectStore("city");
+
+            const cities = city.getAll();
+
+            // Lo ideal sería un async para cuando tengamos todo pero como no se permite se usa el onsuccess
+            cities.onsuccess = function (e) {
+              const citiesAll = e.target.result;
+
+              const citiesFiltered = citiesAll.filter(city => {
+                return city.ciudad.toUpperCase().includes(valor.toUpperCase());
+              });
+              console.log(citiesFiltered);
+
+              document.getElementById('result').innerHTML += citiesFiltered.forEach(city =>{
+                document.getElementById('result').innerHTML += city.ciudad
+              });
+            }
+
+          }
+      })();
+    </script>
+  </body>
 </html>
