@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Buscador de ciudades</title>
+    <style>
+      .subrayado {
+        background-color: lightcoral;
+      }
+    </style>
   </head>
 
   <body>
@@ -58,7 +63,9 @@
           });
         };
 
-        document.querySelector("input").addEventListener("input", function (ev) {
+        document
+          .querySelector("input")
+          .addEventListener("input", function (ev) {
             const valor = ev.target.value;
 
             console.log(valor);
@@ -68,31 +75,44 @@
             }
           });
 
-          function busca(valor) {
+        function busca(valor) {
+          const db = openRequest.result;
 
-            const db = openRequest.result;
+          // Si solo se va a leer usar readonly
+          const transaccion = db.transaction(["city"], "readonly");
+          const city = transaccion.objectStore("city");
 
-            // Si solo se va a leer usar readonly
-            const transaccion = db.transaction(['city'], 'readonly');
-            const city = transaccion.objectStore("city");
+          const cities = city.getAll();
 
-            const cities = city.getAll();
+          // Lo ideal sería un async para cuando tengamos todo pero como no se permite se usa el onsuccess
+          cities.onsuccess = function (e) {
+            const citiesAll = e.target.result;
 
-            // Lo ideal sería un async para cuando tengamos todo pero como no se permite se usa el onsuccess
-            cities.onsuccess = function (e) {
-              const citiesAll = e.target.result;
+            const citiesFiltered = citiesAll.filter((city) => {
+              return city.ciudad.toUpperCase().includes(valor.toUpperCase());
+            });
 
-              const citiesFiltered = citiesAll.filter(city => {
-                return city.ciudad.toUpperCase().includes(valor.toUpperCase());
-              });
-              console.log(citiesFiltered);
+            document.querySelector("#result").innerHTML =
+              "<table id='tabla'></table>";
+            const table = document.querySelector("#tabla");
+            citiesFiltered.forEach((city) => {
+              const row = table.insertRow(0);
+              const cellCiudad = row.insertCell(0);
+              const cellPais = row.insertCell(1);
 
-              document.getElementById('result').innerHTML += citiesFiltered.forEach(city =>{
-                document.getElementById('result').innerHTML += city.ciudad
-              });
-            }
+              // Encuentra la posición de la coincidencia
+              const index = city.ciudad.toUpperCase().indexOf(valor.toUpperCase());
 
-          }
+              // Construye la ciudad con <span> alrededor de la parte coincidente
+              const ciudadConSpan = city.ciudad.substring(0, index) + "<span class='subrayado'>" + 
+                city.ciudad.substring(index, index + valor.length) + "</span>" + city.ciudad.substring(index + valor.length);
+
+              cellCiudad.innerHTML = ciudadConSpan;
+
+              cellPais.innerHTML = city.pais;
+            });
+          };
+        }
       })();
     </script>
   </body>
