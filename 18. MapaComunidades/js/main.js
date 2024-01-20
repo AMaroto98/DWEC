@@ -12,7 +12,6 @@ function allowDrop(event) {
 
 // Función que se ejecuta cuando se suelta un objeto sobre un área que tiene habiitada la operación de soltar
 function drop(event) {
-
   // Esta línea es para evitar comportamientos indeseados del navegador.
   event.preventDefault();
 
@@ -20,18 +19,23 @@ function drop(event) {
   var dataCommunity = event.dataTransfer.getData("text/plan");
 
   // Guardamos en imgElement la referencia a la imagen que está siendo movida
-  var imgElement = document.querySelector('[data-community="' + dataCommunity + '"]');
+  var imgElement = document.querySelector(
+    '[data-community="' + dataCommunity + '"]'
+  );
 
-  // Comparamos que el data-community coincida tanto en el elemento arrastrado como en el objetivo
-  if (imgElement.dataset.community === event.target.dataset.community) {
-    
-    var coords = event.target.coords.split(',');
+  // Obtenemos las coordenadas del ratón en relación con el área de destino
+  var mouseX = event.clientX - event.target.getBoundingClientRect().left;
+  var mouseY = event.clientY - event.target.getBoundingClientRect().top;
 
-    imgElement.style.position = 'absolute';
-    imgElement.style.left = coords[0] + 'px';
-    imgElement.style.top = coords[1] + 'px';
+  // Obtenemos las coordenadas relativas al área de destino
+  var relativeX = mouseX - imgElement.width / 2;
+  var relativeY = mouseY - imgElement.height / 2;
 
-    // Agregar la imagen al área de destino
-    event.target.appendChild(imgElement);
-}
+  // Establecemos la posición de la imagen en relación con el área de destino
+  imgElement.style.position = "absolute";
+  imgElement.style.left = relativeX + "px";
+  imgElement.style.top = relativeY + "px";
+
+  // Agregamos la imagen al área de destino
+  event.target.appendChild(imgElement);
 }

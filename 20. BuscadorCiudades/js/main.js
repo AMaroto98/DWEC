@@ -8,18 +8,35 @@ export async function getCities() {
 
   console.log(citiesData);
 
-  saveCities(citiesData)
-
-//   return citiesData;
-}
-
-function saveCities(data) {
-  const db = indexedDB.open("Cities", 2);
+  const db = indexedDB.open("Cities", 1);
+  console.log(db);
 
   db.onupgradeneeded = function (ev) {
     const dataBase = ev.target.result;
-    const cityObjStore = dataBase.createObjectStore("City", {
-      keyPath: "name", });
-    // cityObjStore.add({data});
+    const cityObjStore = dataBase.createObjectStore("City", { keyPath: "name", });
+
+    for (const country in citiesData) {
+      if (citiesData.hasOwnProperty(country)) {
+        const city = citiesData[country];
+        cityObjStore.add({name: city})
+      }
+    }
   };
 }
+
+// function saveCities(citiesData) {
+
+//   const db = indexedDB.open("Cities", 1);
+
+//   db.onupgradeneeded = function (ev) {
+//     const dataBase = ev.target.result;
+//     const cityObjStore = dataBase.createObjectStore("City", { keyPath: "name", });
+
+//     for (const country in citiesData) {
+//       if (citiesData.hasOwnProperty(country)) {
+//         const city = citiesData[country];
+//         cityObjStore.add({name: city})
+//       }
+//     }
+//   };
+// }
