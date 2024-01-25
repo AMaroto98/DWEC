@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+      .rojo {
+        color: red;
+      }
+
+      .azul {
+        color: blue;
+      }
+
+      .negrita {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="aplicacion">
+      {{ mensaje }} <br />
+
+      <p v-if="activeClass=='rojo'">{{ usuario.nombre }}</p>
+
+      <!-- El código se mantiene pero le mete un display none -->
+      <p v-show="activeClass=='rojo'">{{ usuario.nombre }}</p>
+
+      <p :class="activeClass + ' negrita'">
+        La notificación 1 es: {{ notificaciones[0] }}
+      </p>
+
+      <ul>
+        <li v-for="n in notificaciones">{{ n }}</li>
+      </ul>
+
+      <button @click="changeMessage">Cambiar mensaje</button>
+      <button @click="ordenarApellido">Ordenador por Apellido</button>
+      
+      <ul>
+        <li v-for="user in users">{{ user.name }} - {{ user.surname }} - {{ user.username }}</li>
+      </ul>
+
+    </div>
+
+    <!-- Variables reactivas -->
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            mensaje: "Hello Vue!",
+            usuario: {
+              nombre: "Antonio",
+              apellido: "Maroto",
+            },
+            notificaciones: ["Hola", "Adiós", "¿Qué tal?"],
+            users: [],
+            activeClass: "rojo",
+          };
+        },
+
+        // Se lanza cuando se carga la aplicación
+        async created() {
+            const usuariosFetch = await fetch('http://34.90.153.139/ejercicios/usuarios.php');
+            const usuariosJson = await usuariosFetch.json();
+            this.users = usuariosJson;
+        },
+
+        methods: {
+          changeMessage: function () {
+            this.mensaje = "Goodbye Vue!";
+            this.activeClass = "azul";
+            this.notificaciones.push("Tú dirás...");
+            this.notificaciones.push("Alberto");
+          },
+
+          // Versión corta de lo de arriba
+          changeMessage2() {
+            this.mensaje = "Goodbye Vue!";
+          },
+
+          ordenarApellido() {
+            this.users = this.users.sort((a, b) =>  a.surname.localeCompare(b.surname));
+          }
+        },
+      }).mount("#aplicacion");
+      // En el body no de puede montar, por eso usamos un DIV
+    </script>
+  </body>
+</html>
