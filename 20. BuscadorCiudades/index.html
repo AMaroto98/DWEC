@@ -72,8 +72,18 @@
 
             if (valor.length >= 3) {
               busca(valor);
+              history.pushState({ buscar: valor }, '', '?valorBusqueda=' + valor);
             }
           });
+
+          window.onpopstate = function (event) {
+
+            if (event && event.state && event.state.buscar) {
+              busca(event.state.buscar);
+              document.querySelector('input').value = event.state.buscar;
+            }
+            
+          }
 
         function busca(valor) {
           const db = openRequest.result;
@@ -113,6 +123,8 @@
             });
           };
         }
+
+        
       })();
     </script>
   </body>
