@@ -25,10 +25,19 @@
     <div id="aplicacion">
       {{ mensaje }} <br />
 
-      <p v-if="activeClass=='rojo'">{{ usuario.nombre }}</p>
+      <p v-if="usuario.nombre"> El usuario es{{ usuario.nombre }}</p>
 
       <!-- El código se mantiene pero le mete un display none -->
       <p v-show="activeClass=='rojo'">{{ usuario.nombre }}</p>
+      <p v-show="activeClass=='rojo'">{{ usuario.direccion }}</p>
+
+      <!-- Para los forms hay que definir un modelo -->
+      <input type="text" v-model="mensaje">
+      <input type="text" v-model="usuario.nombre">
+      <input type="text" v-model="usuario.apellido">
+      <input type="text" v-model="usuario.direccion">
+
+      <button @click="enviarFormulario">Enviar</button>
 
       <p :class="activeClass + ' negrita'">
         La notificación 1 es: {{ notificaciones[0] }}
@@ -84,8 +93,12 @@
           },
 
           ordenarApellido() {
-            this.users = this.users.sort((a, b) =>  a.surname.localeCompare(b.surname));
-          }
+            this.users.sort((a, b) =>  a.surname.localeCompare(b.surname));
+          },
+
+          enviarFormulario()  {
+            console.log(this.usuario);
+          },
         },
       }).mount("#aplicacion");
       // En el body no de puede montar, por eso usamos un DIV
