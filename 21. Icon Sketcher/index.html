@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Icon Sketcher</title>
+</head>
+
+<body>
+
+    <div id="aplicacion">
+
+        <input type="text" id="iconoInput" placeholder="discord" v-model="busqueda"> <br>
+        <button @click="buscarIcono">Buscar</button>
+
+        <div id="result">
+            <h2> {{ icono.label }}</h2>
+            <svg :height='icono.height' :width='icono.width'>
+                <path :d="icono.path"/>
+            </svg>
+
+            <div><b>{{ mensaje }}</b></div>
+        </div>
+
+    </div>
+
+    <script>
+
+Vue.createApp({
+        data() {
+            return {
+                busqueda: '',
+                icono: {
+                    width: 0,
+                    height: 0,
+                    path: '',
+                    label: ''
+                },
+                mensaje: "",
+            }
+        },
+
+        methods: {
+
+            async buscarIcono() {
+
+                const iconoFetch = await fetch('http://34.90.153.139/ejercicios/icono.php?nombre=' + this.busqueda);
+                const iconoJson = await iconoFetch.json();
+                console.log(iconoJson);
+
+                if (iconoFetch.ok) {
+
+                    this.icono.height = iconoJson.height;
+                    this.icono.width = iconoJson.width;
+                    this.icono.label = iconoJson.label;
+                    this.icono.path = iconoJson.path;
+
+                } else {
+
+                    this.mensaje = iconoJson.mensaje;
+                }
+            }
+        },
+      }).mount("#aplicacion");
+    </script>
+
+
+    </script>
+    
+</body>
+</html>
