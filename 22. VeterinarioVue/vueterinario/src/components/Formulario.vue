@@ -79,10 +79,10 @@ export default {
     async mounted() {
         const idAnimal = this.$route.params.id;
         if (idAnimal) {
-        this.titulo = 'Modificar Animal';
+        this.title = 'Modificar Animal';
 
         } else {
-        this.titulo = 'Crear Animal';
+        this.title = 'Crear Animal';
         };
 
         await this.getAnimals();
