@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Edad</th>
+                    <th>Sexo</th>
                     <th>Número registro</th>
                     <th>Tipo</th>
                     <th>Ficha</th>

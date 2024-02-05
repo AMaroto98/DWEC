@@ -4,20 +4,26 @@
         <h1>{{ title }}</h1>
 
         <form>
-            <label for="name">Nombre</label>
+            <label for="name">Nombre: </label>
             <input type="text" name="name" v-model="animal.nombre"> <br>
 
-            <label for="sex">Sexo</label>
+            <label for="sex">Sexo: </label>
             <input type="radio" name="sexM" v-model="animal.sexo" value="M"> M
             <input type="radio" name="sexF" v-model="animal.sexo" value="F"> F <br>
 
-            <label for="registryNumber">Número de registro</label>
+            <label for="registryNumber">Número de registro: </label>
             <input type="text" name="registryNumber" v-model="animal.numeroRegistro"> <br>
 
-            <label for="type">Tipo</label>
-            <input type="text" name="type" v-model="animal.tipo"> <br>
+            <label for="type">Tipo: </label>
+            <select name="" v-model="animal.tipo">
+                <option value="Caballo">Caballo</option>
+                <option value="Gato">Gato</option>
+                <option value="Perro">Perro</option>
+            </select> <br>
 
-            <button type="submit" @click="save()">Guardar</button>
+            <button type="submit" @click="save()">Añadir animal</button>
+            <button type="submit" @click="modify()">Modificar animal</button>
+
         </form>
 
         <p>{{ responseSave }}</p>
@@ -32,9 +38,9 @@ export default {
             animal: {
                 id: "",
                 nombre: "",
-                sexo: "",
+                sexo: "F",
                 numeroRegistro: "",
-                tipo: "",
+                tipo: "Caballo",
             },
             responseSave: "",
             animals: [],
@@ -45,17 +51,20 @@ export default {
         async save() {
             const response = await fetch("http://34.90.153.139/ejercicios/veterinario/save.php", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                nombre: this.animal.nombre,
+                sexo: this.animal.sexo,
+                numeroRegistro: this.animal.numeroRegistro,
+                tipo: this.animal.tipo
+            },),
+        });
+        },
+
+        async modify() {
+            const response = await fetch("http://34.90.153.139/ejercicios/veterinario/save.php", {
+            method: "POST",
             body: JSON.stringify(this.animal),
         });
-
-        if (response.ok) {
-            this.responseSave = "Animal añadido con éxito"
-
-        } else {
-            this.responseSave = "Error al intentar añadir el animal"
-            console.error(response.statusText);
-        }
         },
 
         async getAnimals() {
