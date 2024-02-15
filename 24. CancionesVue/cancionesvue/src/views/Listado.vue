@@ -1,5 +1,9 @@
 <template>
   <div class="container-fluid">
+    <div class="row m-2">
+      <input type="text" v-model="busqueda" placeholder="Buscar por letra de canción..." @input="buscarPorLetra()">
+    </div>
+
     <header>
       <div class="row" v-for="categoria in categorias" :key="categoria.id">
         <button class="col-sm btn btn-danger btn-lg m-1" type="button" @click="filtrarPorCategoria(categoria.id)">
@@ -17,11 +21,7 @@
       </div>
     </header>
 
-    <div class="row m-2">
-      <input type="text" v-model="busqueda" placeholder="Buscar por letra de canción..." @input="buscarPorLetra()">
-    </div>
-
-    <main>
+    <!-- <main>
       <template v-if="cancionesFiltradas.length !== 0">
         <div class="cancion" v-for="cancion in cancionesFiltradas" :key="cancion.id">
           <h1>{{ cancion.titulo }}</h1>
@@ -35,14 +35,20 @@
           <span>{{ cancion.letra }}</span>
         </div>
       </template>
-    </main>
+    </main> -->
 
-
+    <Tarjeta :canciones="canciones" :cancionesFiltradas="cancionesFiltradas"></Tarjeta>
   </div>
 </template>
 
 <script>
+import Tarjeta from '../components/Tarjeta.vue';
+
 export default {
+  components: {
+    Tarjeta
+  },
+
   data() {
     return {
       cancionesFiltradas: [],
@@ -112,9 +118,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-span {
-  white-space: pre-line;
-}
 
 * {
   margin: 0;
@@ -122,12 +125,17 @@ span {
   box-sizing: border-box;
 }
 
-main div {
-  margin: 50px auto;
-  text-align: center;
-}
+// span {
+//   white-space: pre-line;
+// }
 
-div.cancion:nth-child(even) {
-  background-color: #eeeeee;
-}
+
+// main div {
+//   margin: 50px auto;
+//   text-align: center;
+// }
+
+// div.cancion:nth-child(even) {
+//   background-color: #eeeeee;
+// }
 </style>

@@ -1,7 +1,4 @@
 <template>
-  <nav>
-    <router-link to="/">Canciones</router-link>
-  </nav>
   <router-view/>
 </template>
 
