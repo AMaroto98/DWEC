@@ -21,23 +21,22 @@
       </div>
     </header>
 
-    <!-- <main>
-      <template v-if="cancionesFiltradas.length !== 0">
-        <div class="cancion" v-for="cancion in cancionesFiltradas" :key="cancion.id">
-          <h1>{{ cancion.titulo }}</h1>
-          <span>{{ cancion.letra }}</span>
-        </div>
-      </template>
+    <div v-if="cancionesFiltradas.length !== 0">
+      <div v-for="cancion in cancionesFiltradas" :key="cancion.id">
+        <Tarjeta :titulo="cancion.titulo" :fecha="cancion.fecha">
+          {{ cancion.letra }}
+        </Tarjeta>
+      </div>
+    </div>
 
-      <template v-else>
-        <div class="cancion" v-for="cancion in canciones" :key="cancion.id">
-          <h1>{{ cancion.titulo }}</h1>
-          <span>{{ cancion.letra }}</span>
-        </div>
-      </template>
-    </main> -->
+    <div v-else>
+      <div v-for="cancion in canciones" :key="cancion.id" >
+        <Tarjeta :titulo="cancion.titulo" :fecha="cancion.fecha">
+          {{ cancion.letra }}
+        </Tarjeta>
+      </div>
+    </div>
 
-    <Tarjeta :canciones="canciones" :cancionesFiltradas="cancionesFiltradas"></Tarjeta>
   </div>
 </template>
 
@@ -102,6 +101,7 @@ export default {
       const fechaB = moment(cancionB.fecha, 'YYYY/MM/DD');
       return fechaA.isAfter(fechaB) ? 1 : fechaA.isBefore(fechaB) ? -1 : 0;
     },
+
      compararFechasDescendente(cancionA, cancionB) {
       const fechaA = moment(cancionA.fecha, 'YYYY/MM/DD');
       const fechaB = moment(cancionB.fecha, 'YYYY/MM/DD');
@@ -125,12 +125,11 @@ export default {
   box-sizing: border-box;
 }
 
-// span {
-//   white-space: pre-line;
-// }
+span {
+  white-space: pre-line;
+}
 
-
-// main div {
+// div {
 //   margin: 50px auto;
 //   text-align: center;
 // }
