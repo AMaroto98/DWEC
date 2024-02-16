@@ -1,11 +1,8 @@
 <template>
-    <div>
-        <template>
-            <div class="cancion">
-                <h1>{{ titulo }}</h1>
-                <p>{{ fecha }}</p>
-            </div>
-        </template>
+    <div class="cancion">
+        <h1>{{ titulo }}</h1>
+        <p>{{ fecha }}</p>
+        <slot />
     </div>
 </template>
 

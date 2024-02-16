@@ -24,7 +24,7 @@
     <div v-if="cancionesFiltradas.length !== 0">
       <div v-for="cancion in cancionesFiltradas" :key="cancion.id">
         <Tarjeta :titulo="cancion.titulo" :fecha="cancion.fecha">
-          {{ cancion.letra }}
+          <span>{{ cancion.letra }}</span> 
         </Tarjeta>
       </div>
     </div>
@@ -32,7 +32,7 @@
     <div v-else>
       <div v-for="cancion in canciones" :key="cancion.id" >
         <Tarjeta :titulo="cancion.titulo" :fecha="cancion.fecha">
-          {{ cancion.letra }}
+          <span>{{ cancion.letra }}</span> 
         </Tarjeta>
       </div>
     </div>
@@ -118,7 +118,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 * {
   margin: 0;
   padding: 0;
@@ -128,13 +127,4 @@ export default {
 span {
   white-space: pre-line;
 }
-
-// div {
-//   margin: 50px auto;
-//   text-align: center;
-// }
-
-// div.cancion:nth-child(even) {
-//   background-color: #eeeeee;
-// }
 </style>
