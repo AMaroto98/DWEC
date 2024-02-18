@@ -14,7 +14,7 @@ import { User } from "./User.js";
  */
 export async function getUsersFor() {
   const usuariosFetch = await fetch(
-    "http://34.90.153.139/ejercicios/usuarios.php"
+    "http://34.90.153.139/ejerci  cios/usuarios.php"
   );
   const users = await usuariosFetch.json();
 
