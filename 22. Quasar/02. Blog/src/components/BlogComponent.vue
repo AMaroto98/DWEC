@@ -15,6 +15,7 @@
 
 <script>
 import moment from "moment";
+import { api } from "../boot/axios.js";
 
 export default {
   data() {
@@ -47,9 +48,7 @@ export default {
       // console.log(result);
 
       // Con Axios
-      const response = await this.$axios.post(
-        "http://34.90.153.139/ejercicios/galeria/save.php",
-        data,
+      const response = await api.post("/save.php", data,
         {
           headers: {
             "Content-Type": false,

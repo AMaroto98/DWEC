@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable @click="navigateToLink">
+  <q-item clickable tag="router-link" :to="link">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
@@ -22,18 +22,11 @@ export default defineComponent({
     },
     link: {
       type: String,
-      default: ''
+      default: '#'
     },
     icon: {
       type: String,
       default: ''
-    }
-  },
-  methods: {
-    navigateToLink() {
-      if (this.link) {
-        this.$router.push(this.link);
-      }
     }
   }
 })

@@ -6,6 +6,8 @@
 
 <script>
 import AnimalsList from "../components/AnimalsList.vue";
+import { api } from '../boot/axios';
+
 
 export default {
   components: {
@@ -17,16 +19,24 @@ export default {
       animals: [],
     };
   },
-  
+
   methods: {
-    async getAnimals() {
+
+    async getAnimalsFetch() {
       const animalsFetch = await fetch('http://34.90.153.139/ejercicios/veterinario/getanimals.php');
       this.animals = await animalsFetch.json();
     },
+
+    async getAnimalsAxios() {
+      const response = await api.get("/getanimals.php");
+      this.animals = response.data;
+    }
   },
 
+
   mounted() {
-    this.getAnimals();
+    // this.getAnimalsFetch();
+    this.getAnimalsAxios();
   },
 };
 </script>

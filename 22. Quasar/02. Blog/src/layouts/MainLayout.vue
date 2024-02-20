@@ -43,7 +43,7 @@ const linksList = [
   {
     title: "Blog",
     icon: "rss_feed",
-    link: "#/BlogPage",
+    link: "/BlogPage",
   },
   {
     title: "índice",
